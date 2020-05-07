@@ -29,6 +29,7 @@ require (
 	github.com/prometheus/client_golang v1.5.1
 	github.com/qiniu/api.v7 v0.0.0-20190520053455-bea02cd22bf4
 	github.com/robfig/cron/v3 v3.0.0
+	github.com/sony/sonyflake v1.0.0
 	github.com/spf13/pflag v1.0.3
 	github.com/spf13/viper v1.4.0
 	github.com/stretchr/testify v1.5.1

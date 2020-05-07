@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/1024casts/snake/pkg/id_gen"
 	"net/http"
 	"os"
 	"os/signal"
@@ -27,7 +28,7 @@ import (
 	"github.com/1024casts/snake/pkg/redis"
 	"github.com/1024casts/snake/pkg/schedule"
 	v "github.com/1024casts/snake/pkg/version"
-	routers "github.com/1024casts/snake/router"
+	"github.com/1024casts/snake/router"
 )
 
 var (
@@ -70,6 +71,12 @@ func main() {
 
 	// init redis
 	redis.Init()
+
+	// init uuid service
+	// init config
+	if err := id_gen.Init(1); err != nil {
+		panic(err)
+	}
 
 	// Set gin mode.
 	gin.SetMode(viper.GetString("run_mode"))

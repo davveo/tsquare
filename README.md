@@ -7,7 +7,7 @@
  [![Go Report Card](https://goreportcard.com/badge/github.com/1024casts/snake)](https://goreportcard.com/report/github.com/1024casts/snake)
  [![License](https://img.shields.io/github/license/1024casts/snake?style=flat-square)](/LICENSE)
 
-一款适合于快速开发业务的Go框架，主要是提供API服务。
+一款适合于快速开发业务的Go框架。
 
 ## 技术栈
 
@@ -25,7 +25,6 @@
 
 ## 特性
 
-- 遵循 RESTful API 设计规范
 - 基于 GIN WEB 框架，提供了丰富的中间件支持（用户认证、跨域、访问日志、请求频率限制、追踪 ID 等）
 - 基于 GORM 的数据库存储
 - JWT 认证

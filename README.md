@@ -1,4 +1,4 @@
-# snake
+# tsquare
 
  [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1024casts/snake/Go?style=flat-square)](https://github.com/1024casts/snake)
  [![codecov](https://codecov.io/gh/1024casts/snake/branch/master/graph/badge.svg)](https://codecov.io/gh/1024casts/snake)
@@ -58,7 +58,7 @@
 
 ```bash
 # 进入到自己的开发目录，下载安装即可，可以不用是 GOPATH
-git clone https://github.com/1024casts/snake
+git clone https://github.com/zbrechave/tsquare
 ```
 
 ## 快速开始
@@ -92,18 +92,15 @@ cp config.sample.yaml config.local.yaml
 `http://localhost:8080/swagger/index.html`
 
 ## 开发规约
- - [配置说明](https://github.com/1024casts/snake/blob/master/conf)
- - [错误码设计](https://github.com/1024casts/snake/tree/master/pkg/errno)
- - [service的使用规则](https://github.com/1024casts/snake/blob/master/service)
- - [repository的使用规则](https://github.com/1024casts/snake/blob/master/repository)
- - [cache使用说明](https://github.com/1024casts/snake/blob/master/pkg/cache)
+ - [配置说明](https://github.com/zbrechave/tsquare/blob/master/conf)
+ - [错误码设计](https://github.com/zbrechave/tsquare/tree/master/pkg/errno)
+ - [service的使用规则](https://github.com/zbrechave/tsquare/blob/master/service)
+ - [repository的使用规则](https://github.com/zbrechave/tsquare/blob/master/repository)
+ - [cache使用说明](https://github.com/zbrechave/tsquare/blob/master/pkg/cache)
  
 ## CHANGELOG
- [更新日志](https://github.com/1024casts/snake/blob/master/CHANGELOG.md)
+ [更新日志](https://github.com/zbrechave/tsquare/blob/master/CHANGELOG.md)
  
-## 谁在用
- - [1024课堂](https://1024casts.com)
-
 ## Discussion
 - Issue: https://github.com/1024casts/snake/issues
 

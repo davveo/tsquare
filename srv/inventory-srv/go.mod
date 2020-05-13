@@ -1,0 +1,1 @@
+module inventory-srv

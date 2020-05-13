@@ -3,8 +3,8 @@ package main
 import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"inventory-srv/handler"
-	"inventory-srv/subscriber"
+	"github.com/zbrechave/tsquare/inventory-srv/handler"
+	"github.com/zbrechave/tsquare/inventory-srv/subscriber"
 
 	inventory "inventory-srv/proto/inventory"
 )

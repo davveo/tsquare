@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	payment "payment-srv/proto/payment"
+	payment "github.com/zbrechave/tsquare/payment-srv/proto/payment"
 )
 
 type Payment struct{}

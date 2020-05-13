@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	order "order-srv/proto/order"
+	order "github.com/zbrechave/tsquare/order-srv/proto/order"
 )
 
 type Order struct{}

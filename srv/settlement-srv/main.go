@@ -3,8 +3,8 @@ package main
 import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"settlement-srv/handler"
-	"settlement-srv/subscriber"
+	"github.com/zbrechave/tsquare/settlement-srv/handler"
+	"github.com/zbrechave/tsquare/settlement-srv/subscriber"
 
 	settlement "settlement-srv/proto/settlement"
 )

@@ -1,12 +1,13 @@
 package main
 
 import (
+	"github.com/micro/go-micro"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"user-srv/handler"
-	"user-srv/subscriber"
+	"github.com/zbrechave/tsquare/user-srv/handler"
+	"github.com/zbrechave/tsquare/user-srv/subscriber"
 
-	user "user-srv/proto/user"
+	user "github.com/zbrechave/tsquare/user-srv/proto/user"
 )
 
 func main() {

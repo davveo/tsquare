@@ -3,8 +3,8 @@ package main
 import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"order-srv/handler"
-	"order-srv/subscriber"
+	"github.com/zbrechave/tsquare/order-srv/handler"
+	"github.com/zbrechave/tsquare/order-srv/subscriber"
 
 	order "order-srv/proto/order"
 )

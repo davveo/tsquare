@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	inventory "inventory-srv/proto/inventory"
+	inventory "github.com/zbrechave/tsquare/inventory-srv/proto/inventory"
 )
 
 type Inventory struct{}

@@ -3,8 +3,8 @@ package main
 import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"payment-srv/handler"
-	"payment-srv/subscriber"
+	"github.com/zbrechave/tsquare/payment-srv/handler"
+	"github.com/zbrechave/tsquare/payment-srv/subscriber"
 
 	payment "payment-srv/proto/payment"
 )

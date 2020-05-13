@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	settlement "settlement-srv/proto/settlement"
+	settlement "github.com/zbrechave/tsquare/settlement-srv/proto/settlement"
 )
 
 type Settlement struct{}

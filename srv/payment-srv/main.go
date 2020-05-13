@@ -6,7 +6,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/zbrechave/tsquare/payment-srv/handler"
 
-	payment "payment-srv/proto/payment"
+	payment "github.com/zbrechave/tsquare/payment-srv/proto/payment"
 )
 
 func main() {

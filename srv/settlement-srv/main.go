@@ -2,11 +2,11 @@ package main
 
 import (
 	"github.com/micro/go-micro"
-	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
+	log "github.com/micro/go-micro/v2/logger"
 	"github.com/zbrechave/tsquare/settlement-srv/handler"
 
-	settlement "settlement-srv/proto/settlement"
+	settlement "github.com/zbrechave/tsquare/settlement-srv/proto/settlement"
 )
 
 func main() {

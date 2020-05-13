@@ -6,7 +6,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/zbrechave/tsquare/order-srv/handler"
 
-	order "order-srv/proto/order"
+	order "github.com/zbrechave/tsquare/order-srv/proto/order"
 )
 
 func main() {

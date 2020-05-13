@@ -6,7 +6,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/zbrechave/tsquare/inventory-srv/handler"
 
-	inventory "inventory-srv/proto/inventory"
+	inventory "github.com/zbrechave/tsquare/inventory-srv/proto/inventory"
 )
 
 func main() {

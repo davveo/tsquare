@@ -1,4 +1,4 @@
-# Inventory Service
+# Inventory Service(库存服务)
 
 This is the Inventory service
 

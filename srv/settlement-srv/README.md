@@ -1,11 +1,11 @@
-# User Service(用户服务)
+# Settlement Service
 
-This is the User service
+This is the Settlement service
 
 Generated with
 
 ```
-micro new user-srv --namespace=go.micro --type=service
+micro new settlement-srv --namespace=go.micro --type=service
 ```
 
 ## Getting Started
@@ -16,9 +16,9 @@ micro new user-srv --namespace=go.micro --type=service
 
 ## Configuration
 
-- FQDN: go.micro.service.user
+- FQDN: go.micro.service.settlement
 - Type: service
-- Alias: user
+- Alias: settlement
 
 ## Dependencies
 
@@ -46,7 +46,7 @@ make build
 
 Run the service
 ```
-./user-service
+./settlement-service
 ```
 
 Build a docker image

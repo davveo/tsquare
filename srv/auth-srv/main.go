@@ -5,7 +5,6 @@ import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
 	"github.com/zbrechave/tsquare/auth-srv/handler"
-	"github.com/zbrechave/tsquare/auth-srv/subscriber"
 
 	auth "github.com/zbrechave/tsquare/auth-srv/proto/auth"
 )
@@ -22,9 +21,6 @@ func main() {
 
 	// Register Handler
 	auth.RegisterAuthHandler(service.Server(), new(handler.Auth))
-
-	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.service.auth", service.Server(), new(subscriber.Auth))
 
 	// Run service
 	if err := service.Run(); err != nil {

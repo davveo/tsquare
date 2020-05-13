@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/micro/go-micro"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
 	"github.com/zbrechave/tsquare/settlement-srv/handler"
-	"github.com/zbrechave/tsquare/settlement-srv/subscriber"
 
 	settlement "settlement-srv/proto/settlement"
 )
@@ -21,9 +21,6 @@ func main() {
 
 	// Register Handler
 	settlement.RegisterSettlementHandler(service.Server(), new(handler.Settlement))
-
-	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.service.settlement", service.Server(), new(subscriber.Settlement))
 
 	// Run service
 	if err := service.Run(); err != nil {

@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/micro/go-micro"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
 	"github.com/zbrechave/tsquare/payment-srv/handler"
-	"github.com/zbrechave/tsquare/payment-srv/subscriber"
 
 	payment "payment-srv/proto/payment"
 )
@@ -21,9 +21,6 @@ func main() {
 
 	// Register Handler
 	payment.RegisterPaymentHandler(service.Server(), new(handler.Payment))
-
-	// Register Struct as Subscriber
-	micro.RegisterSubscriber("go.micro.service.payment", service.Server(), new(subscriber.Payment))
 
 	// Run service
 	if err := service.Run(); err != nil {

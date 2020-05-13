@@ -23,9 +23,9 @@ import (
 func init() {
 	token := &token.Token{}
 
-	plugin.Register(cors.NewPlugin())
+	_ = plugin.Register(cors.NewPlugin())
 
-	plugin.Register(plugin.NewPlugin(
+	_ = plugin.Register(plugin.NewPlugin(
 		plugin.WithName("auth"),
 		plugin.WithHandler(
 			auth.JWTAuthWrapper(token),
@@ -42,19 +42,19 @@ func init() {
 			return nil
 		}),
 	))
-	plugin.Register(plugin.NewPlugin(
+	_ = plugin.Register(plugin.NewPlugin(
 		plugin.WithName("tracer"),
 		plugin.WithHandler(
 			stdhttp.TracerWrapper,
 		),
 	))
-	plugin.Register(plugin.NewPlugin(
+	_ = plugin.Register(plugin.NewPlugin(
 		plugin.WithName("breaker"),
 		plugin.WithHandler(
 			hystrix.BreakerWrapper,
 		),
 	))
-	plugin.Register(plugin.NewPlugin(
+	_ = plugin.Register(plugin.NewPlugin(
 		plugin.WithName("metrics"),
 		plugin.WithHandler(
 			prometheus.MetricsWrapper,

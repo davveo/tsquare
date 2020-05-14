@@ -1,6 +1,6 @@
 ## tsquare
 ### 项目架构图
-![项目架构图](https://github.com/zbrechave/tsquare/docs/项目架构图.png)
+![项目架构图](https://github.com/zbrechave/tsquare/blob/master/docs/项目架构图.png)
 ### 项目启动顺序
   1. 启动服务
   ```bash

@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/zbrechave/tsquare/lib/token"
+	"github.com/zbrechave/tsquare/plugins/token"
 
 	"github.com/micro/micro/plugin"
 )

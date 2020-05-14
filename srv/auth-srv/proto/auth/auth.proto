@@ -4,35 +4,23 @@ package go.micro.service.auth;
 option go_package = "./proto/auth";
 
 service Auth {
-	rpc Call(Request) returns (Response) {}
-	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
-	rpc PingPong(stream Ping) returns (stream Pong) {}
+	rpc GenAccessToken (Request) returns (Response) {}
+	rpc DelAccessToekn (Request) returns (Response) {}
 }
 
-message Message {
-	string say = 1;
+message Error {
+    int32 code = 1;
+    string detail = 2;
 }
 
 message Request {
-	string name = 1;
+    uint64 userId = 1;
+    string userName = 2;
+    string token = 3;
 }
 
 message Response {
-	string msg = 1;
-}
-
-message StreamingRequest {
-	int64 count = 1;
-}
-
-message StreamingResponse {
-	int64 count = 1;
-}
-
-message Ping {
-	int64 stroke = 1;
-}
-
-message Pong {
-	int64 stroke = 1;
+    bool success = 1;
+    Error error = 2;
+    string token = 3;
 }

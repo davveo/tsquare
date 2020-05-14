@@ -1,13 +1,14 @@
 package stdhttp
 
 import (
-	"github.com/opentracing/opentracing-go"
-	"github.com/opentracing/opentracing-go/ext"
-	statuscode "github.com/zbrechave/tsquare/lib/http"
 	"log"
 	"math/rand"
 	"net/http"
 	"time"
+
+	"github.com/opentracing/opentracing-go"
+	"github.com/opentracing/opentracing-go/ext"
+	statuscode "github.com/zbrechave/tsquare/plugins/http"
 )
 
 // sf sampling frequency

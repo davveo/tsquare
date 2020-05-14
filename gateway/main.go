@@ -6,11 +6,11 @@ import (
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/zbrechave/tsquare/lib/tracer"
-	"github.com/zbrechave/tsquare/lib/wrapper/auth"
-	"github.com/zbrechave/tsquare/lib/wrapper/breaker/hystrix"
-	"github.com/zbrechave/tsquare/lib/wrapper/metrics/prometheus"
-	"github.com/zbrechave/tsquare/lib/wrapper/tracer/opentracing/stdhttp"
+	"github.com/zbrechave/tsquare/plugins/tracer"
+	"github.com/zbrechave/tsquare/plugins/wrapper/auth"
+	"github.com/zbrechave/tsquare/plugins/wrapper/breaker/hystrix"
+	"github.com/zbrechave/tsquare/plugins/wrapper/metrics/prometheus"
+	"github.com/zbrechave/tsquare/plugins/wrapper/tracer/opentracing/stdhttp"
 
 	ph "github.com/afex/hystrix-go/hystrix"
 	"github.com/micro/cli"

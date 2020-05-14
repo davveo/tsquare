@@ -3,10 +3,11 @@ package hystrix
 import (
 	"errors"
 	"fmt"
-	"github.com/afex/hystrix-go/hystrix"
-	statuscode "github.com/zbrechave/tsquare/lib/http"
 	"log"
 	"net/http"
+
+	"github.com/afex/hystrix-go/hystrix"
+	statuscode "github.com/zbrechave/tsquare/plugins/http"
 )
 
 // BreakerWrapper hystrix breaker

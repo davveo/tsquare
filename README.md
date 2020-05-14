@@ -64,13 +64,7 @@
   ```
     
 ### auth-srv
-
+    认证服务
+    
 ### user-srv
-
-### order-srv
-
-### payment-srv
-
-### inventory-srv
-
-### settlement-srv
+    用户服务

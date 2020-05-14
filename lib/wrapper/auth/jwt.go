@@ -4,11 +4,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/zbrechave/tsquare/lib/token"
+
 	"github.com/micro/micro/plugin"
 )
 
-func JWTAuthWrapper(token *jwt.Token) plugin.Handler {
+func JWTAuthWrapper(token *token.Token) plugin.Handler {
 	return func(handler http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			log.Println("auth plugin received: " + r.URL.Path)

@@ -1,5 +1,7 @@
-### tsquare
-#### 项目启动顺序
+## tsquare
+### 项目架构图
+[项目架构图](https://github.com/zbrechave/tsquare/docs/项目架构图.png)
+### 项目启动顺序
   1. 启动服务
   ```bash
     # 启动consul

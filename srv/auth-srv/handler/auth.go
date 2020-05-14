@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	auth "github.com/zbrechave/tsquare/auth-srv/proto/auth"
+	auth "auth-srv/proto/auth"
 )
 
 type Auth struct{}

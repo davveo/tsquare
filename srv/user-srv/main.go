@@ -3,15 +3,14 @@ package main
 import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"auth-srv/handler"
-
-	auth "auth-srv/proto/auth"
+	"user-srv/handler"
+	user "user-srv/proto/user"
 )
 
 func main() {
 	// New Service
 	service := micro.NewService(
-		micro.Name("go.micro.service.auth"),
+		micro.Name("go.micro.service.user"),
 		micro.Version("latest"),
 	)
 
@@ -19,7 +18,7 @@ func main() {
 	service.Init()
 
 	// Register Handler
-	auth.RegisterAuthHandler(service.Server(), new(handler.Auth))
+	user.RegisterUserHandler(service.Server(), new(handler.User))
 
 	// Run service
 	if err := service.Run(); err != nil {

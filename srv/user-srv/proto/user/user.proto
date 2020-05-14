@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package go.micro.service.user;
+option go_package = "./proto/user";
 
 service User {
 	rpc Call(Request) returns (Response) {}

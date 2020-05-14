@@ -11,11 +11,14 @@ proto:
 .PHONY: build
 build: proto
 
-	go build -o user-service *.go
+	go build -o user-srv *.go
 
 .PHONY: test
 test:
 	go test -v ./... -cover
+
+run:
+	./user-srv --registry=consul
 
 .PHONY: docker
 docker:

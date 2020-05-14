@@ -1,11 +1,11 @@
 
 .PHONY: build
 build:
-	go build -o ../build/microGW main.go
+	go build -o ../build/api-gateway main.go
 
 .PHONY: run
 run:build
-	../build/microGW  --registry=consul api -handler=http
+	../build/api-gateway  --registry=consul api -handler=http
 
 .PHONY: test
 test:
@@ -13,6 +13,6 @@ test:
 
 .PHONY: docker
 docker:
-	CGO_ENABLED=0 GOOS=linux go build -o micro main.go
+	CGO_ENABLED=0 GOOS=linux go build -o api-gateway main.go
 	docker build . -t xuxu123/micro:latest
 	rm micro

@@ -9,14 +9,12 @@ proto:
 
 .PHONY: build
 build: proto
-	@echo building auth-srv...
 	@go build -o ../../build/auth-srv *.go
-	@echo building success
 
 .PHONY: test
 test:
 	go test -v ./... -cover
-run:
+run:build
 	@../../build/auth-srv --registry=consul
 
 .PHONY: docker

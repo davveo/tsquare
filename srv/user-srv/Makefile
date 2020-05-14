@@ -10,15 +10,13 @@ proto:
 
 .PHONY: build
 build: proto
-	@echo building user-srv...
 	@go build -o ../../build/user-srv *.go
-	@echo building success
 
 .PHONY: test
 test:
 	go test -v ./... -cover
 
-run:
+run:build
 	@../../build/user-srv --registry=consul
 
 .PHONY: docker

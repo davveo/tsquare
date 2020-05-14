@@ -1,9 +1,9 @@
 package token
 
 import (
-	"time"
 	"log"
 	"sync"
+	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	config "github.com/micro/go-micro/config"
@@ -98,7 +98,7 @@ func (srv *Token) Decode(tokenStr string) (*CustomClaims, error) {
 
 // Encode 将 User 用户信息加密为 JWT 字符串
 // expireTime := time.Now().Add(time.Hour * 24 * 3).Unix() 三天后过期
-func (srv *Token) Encode(issuer,userName string, expireTime int64) (string, error) {
+func (srv *Token) Encode(issuer, userName string, expireTime int64) (string, error) {
 	claims := CustomClaims{
 		userName,
 		jwt.StandardClaims{

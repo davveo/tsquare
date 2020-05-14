@@ -5,7 +5,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/zbrechave/tsquare/lib/token"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/zbrechave/tsquare/lib/tracer"
 	"github.com/zbrechave/tsquare/lib/wrapper/auth"
 	"github.com/zbrechave/tsquare/lib/wrapper/breaker/hystrix"
@@ -21,7 +21,7 @@ import (
 )
 
 func init() {
-	token := &token.Token{}
+	token := &jwt.Token{}
 
 	_ = plugin.Register(cors.NewPlugin())
 

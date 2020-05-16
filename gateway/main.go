@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/zbrechave/tsquare/plugins/tracer"
+	"github.com/zbrechave/tsquare/plugins/tracer2"
 	"github.com/zbrechave/tsquare/plugins/wrapper/auth"
 	"github.com/zbrechave/tsquare/plugins/wrapper/breaker/hystrix"
 	"github.com/zbrechave/tsquare/plugins/wrapper/metrics/prometheus"
@@ -66,7 +66,7 @@ const name = "API gateway"
 
 func main() {
 	stdhttp.SetSamplingFrequency(50)
-	t, io, err := tracer.NewTracer(name, "")
+	t, io, err := tracer2.NewTracer(name, "")
 	if err != nil {
 		log.Fatal(err)
 	}

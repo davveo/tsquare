@@ -4,8 +4,9 @@ package go.micro.service.auth;
 option go_package = "./proto/auth";
 
 service Auth {
-	rpc GenAccessToken (Request) returns (Response) {}
-	rpc DelAccessToekn (Request) returns (Response) {}
+	rpc MakeAccessToken (Request) returns (Response) {}
+    rpc DelUserAccessToken (Request) returns (Response) {}
+    rpc GetCachedAccessToken (Request) returns (Response) {}
 }
 
 message Error {
@@ -14,7 +15,7 @@ message Error {
 }
 
 message Request {
-    uint64 userId = 1;
+    int64 userId = 1;
     string userName = 2;
     string token = 3;
 }

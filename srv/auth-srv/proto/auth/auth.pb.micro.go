@@ -5,12 +5,14 @@ package auth
 
 import (
 	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
 	math "math"
+
+	proto "github.com/golang/protobuf/proto"
 )
 
 import (
 	context "context"
+
 	api "github.com/micro/go-micro/v2/api"
 	client "github.com/micro/go-micro/v2/client"
 	server "github.com/micro/go-micro/v2/server"
@@ -42,8 +44,9 @@ func NewAuthEndpoints() []*api.Endpoint {
 // Client API for Auth service
 
 type AuthService interface {
-	GenAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	DelAccessToekn(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	MakeAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	DelUserAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	GetCachedAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
 type authService struct {
@@ -52,14 +55,20 @@ type authService struct {
 }
 
 func NewAuthService(name string, c client.Client) AuthService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "go.micro.srv.auth"
+	}
 	return &authService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *authService) GenAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Auth.GenAccessToken", in)
+func (c *authService) MakeAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Auth.MakeAccessToken", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -68,8 +77,18 @@ func (c *authService) GenAccessToken(ctx context.Context, in *Request, opts ...c
 	return out, nil
 }
 
-func (c *authService) DelAccessToekn(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Auth.DelAccessToekn", in)
+func (c *authService) DelUserAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Auth.DelUserAccessToken", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authService) GetCachedAccessToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Auth.GetCachedAccessToken", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -81,14 +100,16 @@ func (c *authService) DelAccessToekn(ctx context.Context, in *Request, opts ...c
 // Server API for Auth service
 
 type AuthHandler interface {
-	GenAccessToken(context.Context, *Request, *Response) error
-	DelAccessToekn(context.Context, *Request, *Response) error
+	MakeAccessToken(context.Context, *Request, *Response) error
+	DelUserAccessToken(context.Context, *Request, *Response) error
+	GetCachedAccessToken(context.Context, *Request, *Response) error
 }
 
 func RegisterAuthHandler(s server.Server, hdlr AuthHandler, opts ...server.HandlerOption) error {
 	type auth interface {
-		GenAccessToken(ctx context.Context, in *Request, out *Response) error
-		DelAccessToekn(ctx context.Context, in *Request, out *Response) error
+		MakeAccessToken(ctx context.Context, in *Request, out *Response) error
+		DelUserAccessToken(ctx context.Context, in *Request, out *Response) error
+		GetCachedAccessToken(ctx context.Context, in *Request, out *Response) error
 	}
 	type Auth struct {
 		auth
@@ -101,10 +122,14 @@ type authHandler struct {
 	AuthHandler
 }
 
-func (h *authHandler) GenAccessToken(ctx context.Context, in *Request, out *Response) error {
-	return h.AuthHandler.GenAccessToken(ctx, in, out)
+func (h *authHandler) MakeAccessToken(ctx context.Context, in *Request, out *Response) error {
+	return h.AuthHandler.MakeAccessToken(ctx, in, out)
 }
 
-func (h *authHandler) DelAccessToekn(ctx context.Context, in *Request, out *Response) error {
-	return h.AuthHandler.DelAccessToekn(ctx, in, out)
+func (h *authHandler) DelUserAccessToken(ctx context.Context, in *Request, out *Response) error {
+	return h.AuthHandler.DelUserAccessToken(ctx, in, out)
+}
+
+func (h *authHandler) GetCachedAccessToken(ctx context.Context, in *Request, out *Response) error {
+	return h.AuthHandler.GetCachedAccessToken(ctx, in, out)
 }

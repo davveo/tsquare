@@ -1,9 +1,9 @@
 package basic
 
 import (
-	"auth-srv/basic/config"
-	"auth-srv/basic/db"
-	"auth-srv/basic/redis"
+	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/zbrechave/tsquare/basic/db"
+	"github.com/zbrechave/tsquare/basic/redis"
 )
 
 func Init() {

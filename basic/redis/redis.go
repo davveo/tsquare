@@ -3,7 +3,7 @@ package redis
 import (
 	"sync"
 
-	"auth-srv/basic/config"
+	"github.com/zbrechave/tsquare/basic/config"
 
 	"github.com/go-redis/redis"
 	log "github.com/micro/go-micro/v2/logger"

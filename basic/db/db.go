@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"auth-srv/basic/config"
+	"github.com/zbrechave/tsquare/basic/config"
 
 	log "github.com/micro/go-micro/v2/logger"
 )

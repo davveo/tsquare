@@ -8,6 +8,7 @@ import (
 
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
+	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/plugins/session"
 	auth "github.com/zbrechave/tsquare/srv/auth-srv/proto/auth"
 	user "github.com/zbrechave/tsquare/srv/user-srv/proto/user"
@@ -77,10 +78,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		cookie := http.Cookie{Name: "remember-me-token", Value: rsp2.Token, Path: "/", Expires: expire, MaxAge: 90000}
 		http.SetCookie(w, &cookie)
 
+		timeString := time.Now().Format(common.DefaultMsTimeLayout)
+
 		// 同步到session中
 		sess := session.GetSession(w, r)
 		sess.Values["userId"] = rsp.User.Id
 		sess.Values["userName"] = rsp.User.Name
+		sess.Values["login_time"] = timeString
 		_ = sess.Save(r, w)
 
 	} else {

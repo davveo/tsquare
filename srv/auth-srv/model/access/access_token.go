@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"time"
 
+	"auth-srv/basic/config"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/micro/go-micro/v2/broker"
 	log "github.com/micro/go-micro/v2/logger"
-	"github.com/zbrechave/tsquare/srv/auth-srv/basic/config"
 )
 
 var (

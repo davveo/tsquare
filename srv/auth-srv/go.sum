@@ -461,6 +461,7 @@ github.com/xeipuuv/gojsonschema v1.1.0/go.mod h1:5yf86TLmAcydyeJq5YvxkGPE2fm/u4m
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2 h1:eY9dn8+vbi4tKz5Qo6v2eYzo7kUS51QINcR5jNpbZS8=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
 github.com/zbrechave/tsquare v0.0.0-20200516020240-02c7c6b79a7c h1:O034do6TWPPI5FYeRdO4lsAla9jpVk8pcXkeagq2jYw=
+github.com/zbrechave/tsquare v0.0.0-20200517052706-50815f257de8 h1:8DLZ2hEEhwkOmPqUrjzNziRQZc47Sb5IexJtDVMiwCU=
 github.com/zbrechave/tsquare/srv/auth-srv v0.0.0-20200516020240-02c7c6b79a7c h1:F/M3fA2+OXKzEyqGpJDhd4vPty5G4BUUrmq3IgA+FiU=
 go.etcd.io/bbolt v1.3.3/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
 go.etcd.io/bbolt v1.3.4 h1:hi1bXHMVrlQh6WwxAy+qZCV/SYIlqo+Ushwdpa4tAKg=

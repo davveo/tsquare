@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"time"
 
+	"auth-srv/basic/config"
+
 	"github.com/dgrijalva/jwt-go"
-	"github.com/zbrechave/tsquare/srv/auth-srv/basic/config"
 )
 
 // createTokenClaims Claims

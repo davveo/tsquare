@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"sync"
 
+	"auth-srv/basic/redis"
+
 	r "github.com/go-redis/redis"
-	"github.com/zbrechave/tsquare/srv/auth-srv/basic/redis"
 )
 
 var (

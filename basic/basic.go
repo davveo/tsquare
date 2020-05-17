@@ -1,31 +1,13 @@
 package basic
 
 import (
-	"github.com/zbrechave/tsquare/basic/config"
+	"auth-srv/basic/config"
+	"auth-srv/basic/db"
+	"auth-srv/basic/redis"
 )
 
-var (
-	pluginFuncs []func()
-)
-
-type Options struct {
-	EnableDB    bool
-	EnableRedis bool
-	cfgOps      []config.Option
-}
-
-type Option func(o *Options)
-
-func Init(opts ...config.Option) {
-	// 初始化配置
-	config.Init(opts...)
-
-	// 加载依赖配置的插件
-	for _, f := range pluginFuncs {
-		f()
-	}
-}
-
-func Register(f func()) {
-	pluginFuncs = append(pluginFuncs, f)
+func Init() {
+	config.Init()
+	db.Init()
+	redis.Init()
 }

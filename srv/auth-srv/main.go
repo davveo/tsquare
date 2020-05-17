@@ -12,9 +12,10 @@ import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 
-	"auth-srv/basic"
-	"auth-srv/basic/config"
 	auth "auth-srv/proto/auth"
+
+	"github.com/zbrechave/tsquare/basic"
+	"github.com/zbrechave/tsquare/basic/config"
 )
 
 func main() {

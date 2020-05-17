@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"auth-srv/basic/config"
+	"github.com/zbrechave/tsquare/basic/config"
 
 	"github.com/dgrijalva/jwt-go"
 )

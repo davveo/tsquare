@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"auth-srv/basic/redis"
+	"github.com/zbrechave/tsquare/basic/redis"
 
 	r "github.com/go-redis/redis"
 )

@@ -12,6 +12,7 @@ require (
 	github.com/micro/cli v0.2.0
 	github.com/micro/cli/v2 v2.1.2
 	github.com/micro/go-micro/v2 v2.6.0
+	github.com/micro/go-plugins/config/source/grpc/v2 v2.5.0 // indirect
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
 

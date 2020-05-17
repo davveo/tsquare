@@ -46,7 +46,7 @@ func main() {
 	)
 
 	// Register Handler
-	_ = auth.RegisterServiceHandler(service.Server(), new(handler.Auth))
+	_ = auth.RegisterAuthHandler(service.Server(), new(handler.Auth))
 
 	// Run service
 	if err := service.Run(); err != nil {

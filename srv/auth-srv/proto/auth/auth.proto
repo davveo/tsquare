@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package go.micro.service.auth;
 
-service Service {
+service Auth {
     rpc MakeAccessToken (Request) returns (Response) {
     }
     rpc DelUserAccessToken (Request) returns (Response) {

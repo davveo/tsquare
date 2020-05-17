@@ -5,7 +5,7 @@ This is the Auth service
 Generated with
 
 ```
-micro new auth-srv --namespace=go.micro --type=service
+micro new --namespace=go.micro --type=service auth-srv
 ```
 
 ## Getting Started

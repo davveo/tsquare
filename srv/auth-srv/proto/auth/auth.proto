@@ -1,12 +1,15 @@
 syntax = "proto3";
 
 package go.micro.service.auth;
-option go_package = "./proto/auth";
 
-service Auth {
-	rpc MakeAccessToken (Request) returns (Response) {}
-    rpc DelUserAccessToken (Request) returns (Response) {}
-    rpc GetCachedAccessToken (Request) returns (Response) {}
+service Service {
+    rpc MakeAccessToken (Request) returns (Response) {
+    }
+    rpc DelUserAccessToken (Request) returns (Response) {
+    }
+
+    rpc GetCachedAccessToken (Request) returns (Response) {
+    }
 }
 
 message Error {

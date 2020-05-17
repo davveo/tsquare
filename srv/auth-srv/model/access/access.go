@@ -5,17 +5,13 @@ import (
 	"sync"
 
 	r "github.com/go-redis/redis"
-	"github.com/micro-in-cn/tutorials/microservice-in-micro/part8/plugins/jwt"
-	"github.com/micro-in-cn/tutorials/microservice-in-micro/part8/plugins/redis"
-	"github.com/micro/go-micro/util/log"
-	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/zbrechave/tsquare/srv/auth-srv/basic/redis"
 )
 
 var (
-	s   *service
-	ca  *r.Client
-	m   sync.RWMutex
-	cfg = &jwt.Jwt{}
+	s  *service
+	ca *r.Client
+	m  sync.RWMutex
 )
 
 // service 服务
@@ -51,14 +47,7 @@ func Init() {
 		return
 	}
 
-	err := config.C().App("jwt", cfg)
-	if err != nil {
-		panic(err)
-	}
-
-	log.Logf("[initCfg] 配置，cfg：%v", cfg)
-
-	ca = redis.Redis()
+	ca = redis.GetRedis()
 
 	s = &service{}
 }

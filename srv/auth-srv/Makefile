@@ -4,18 +4,18 @@ MODIFY=Mgithub.com/micro/go-micro/api/proto/api.proto=github.com/micro/go-micro/
 
 .PHONY: proto
 proto:
-	@protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/auth/auth.proto
+    
+	protoc --proto_path=. --micro_out=${MODIFY}:. --go_out=${MODIFY}:. proto/auth/auth.proto
     
 
 .PHONY: build
 build: proto
-	@go build -o ../../build/auth-srv *.go
+
+	go build -o auth-service *.go
 
 .PHONY: test
 test:
 	go test -v ./... -cover
-run:build
-	@../../build/auth-srv --registry=consul
 
 .PHONY: docker
 docker:

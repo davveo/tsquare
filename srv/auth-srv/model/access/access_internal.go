@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/zbrechave/tsquare/srv/auth-srv/basic/config"
 )
 
 // createTokenClaims Claims
@@ -58,7 +59,7 @@ func (s *service) parseToken(tk string) (c *jwt.StandardClaims, err error) {
 		if !ok {
 			return nil, fmt.Errorf("不合法的token格式: %v", token.Header["alg"])
 		}
-		return []byte(cfg.SecretKey), nil
+		return []byte(config.GetJwtConfig().GetSecretKey()), nil
 	})
 
 	// jwt 框架自带了一些检测，如过期，发布者错误等

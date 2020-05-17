@@ -7,7 +7,7 @@ import (
 
 	jwt "github.com/dgrijalva/jwt-go"
 	config "github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/config/source/consul"
+	"github.com/micro/go-plugins/registry/consul"
 )
 
 // CustomClaims 自定义的 metadata在加密后作为 JWT 的第二部分返回给客户端

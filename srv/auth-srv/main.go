@@ -1,9 +1,10 @@
 package main
 
 import (
-	"auth-srv/handler"
-	"auth-srv/model"
 	"fmt"
+
+	"github.com/zbrechave/tsquare/srv/auth-srv/handler"
+	"github.com/zbrechave/tsquare/srv/auth-srv/model"
 
 	"github.com/micro/cli"
 	"github.com/micro/go-micro/v2/registry"
@@ -12,7 +13,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 
-	auth "auth-srv/proto/auth"
+	auth "github.com/zbrechave/tsquare/srv/auth-srv/proto/auth"
 
 	"github.com/zbrechave/tsquare/basic"
 	"github.com/zbrechave/tsquare/basic/config"

@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/zbrechave/tsquare/srv/auth-srv/handler"
+	"github.com/micro/cli/v2"
 	"github.com/zbrechave/tsquare/srv/auth-srv/model"
 
-	"github.com/micro/cli"
+	"github.com/zbrechave/tsquare/srv/auth-srv/handler"
+
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 

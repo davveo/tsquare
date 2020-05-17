@@ -36,7 +36,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 	_ = r.ParseForm()
 
-	rsp, err := authClient.QueryUserByName(context.TODO(), &user.Request{
+	rsp, err := userClient.QueryUserByName(context.TODO(), &user.Request{
 		UserName: r.Form.Get("userName"),
 	})
 	if err != nil {
@@ -138,20 +138,4 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-}
-
-func TestSession(w http.ResponseWriter, r *http.Request) {
-	sess := session.GetSession(w, r)
-
-	if v, ok := sess.Values["path"]; !ok {
-		sess.Values["path"] = r.URL.Query().Get("path")
-		log.Infof("path:" + r.URL.Query().Get("path"))
-	} else {
-		log.Infof(v.(string))
-	}
-
-	log.Infof(sess.ID)
-	log.Infof(sess.Name())
-
-	_, _ = w.Write([]byte("OK"))
 }

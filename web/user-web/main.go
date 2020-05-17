@@ -40,7 +40,6 @@ func main() {
 
 	service.HandleFunc("/user/login", handler.Login)
 	service.HandleFunc("/user/logout", handler.Logout)
-	service.HandleFunc("/user/test", handler.TestSession)
 
 	// run service
 	if err := service.Run(); err != nil {

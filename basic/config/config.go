@@ -43,7 +43,7 @@ func Init() {
 	appPath, _ := filepath.Abs(filepath.Dir(filepath.Join("./", string(filepath.Separator))))
 
 	pt := filepath.Join(appPath, "conf")
-	os.Chdir(appPath)
+	_ = os.Chdir(appPath)
 
 	// 找到application.yml文件
 	if err = config.Load(file.NewSource(file.WithPath(pt + "/application.yml"))); err != nil {
@@ -77,10 +77,10 @@ func Init() {
 	}
 
 	// 赋值
-	config.Get(defaultRootPath, "etcd").Scan(&etcdConfig)
-	config.Get(defaultRootPath, "mysql").Scan(&mysqlConfig)
-	config.Get(defaultRootPath, "redis").Scan(&redisConfig)
-	config.Get(defaultRootPath, "jwt").Scan(&jwtConfig)
+	_ = config.Get(defaultRootPath, "etcd").Scan(&etcdConfig)
+	_ = config.Get(defaultRootPath, "mysql").Scan(&mysqlConfig)
+	_ = config.Get(defaultRootPath, "redis").Scan(&redisConfig)
+	_ = config.Get(defaultRootPath, "jwt").Scan(&jwtConfig)
 
 	// 标记已经初始化
 	inited = true

@@ -4,15 +4,18 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/zbrechave/tsquare/basic/redis"
-
 	r "github.com/go-redis/redis"
+	log "github.com/micro/go-micro/v2/logger"
+	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/zbrechave/tsquare/plugins/jwt"
+	"github.com/zbrechave/tsquare/plugins/redis"
 )
 
 var (
-	s  *service
-	ca *r.Client
-	m  sync.RWMutex
+	s   *service
+	ca  *r.Client
+	m   sync.RWMutex
+	cfg = &jwt.Jwt{}
 )
 
 // service 服务
@@ -48,7 +51,14 @@ func Init() {
 		return
 	}
 
-	ca = redis.GetRedis()
+	err := config.C().App("jwt", cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Infof("[initCfg] 配置，cfg：%v", cfg)
+
+	ca = redis.Redis()
 
 	s = &service{}
 }

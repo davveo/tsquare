@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zbrechave/tsquare/basic/config"
-
 	"github.com/dgrijalva/jwt-go"
 	"github.com/micro/go-micro/v2/broker"
 	log "github.com/micro/go-micro/v2/logger"
@@ -36,7 +34,7 @@ func (s *service) MakeAccessToken(subject *Subject) (ret string, err error) {
 
 	// 创建
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, m)
-	ret, err = token.SignedString([]byte(config.GetJwtConfig().GetSecretKey()))
+	ret, err = token.SignedString([]byte(cfg.SecretKey))
 	if err != nil {
 		return "", fmt.Errorf("[MakeAccessToken] 创建token失败，err: %s", err)
 	}

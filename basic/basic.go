@@ -2,12 +2,30 @@ package basic
 
 import (
 	"github.com/zbrechave/tsquare/basic/config"
-	"github.com/zbrechave/tsquare/basic/db"
-	"github.com/zbrechave/tsquare/basic/redis"
 )
 
-func Init() {
-	config.Init()
-	db.Init()
-	redis.Init()
+var (
+	pluginFuncs []func()
+)
+
+type Options struct {
+	EnableDB    bool
+	EnableRedis bool
+	cfgOps      []config.Option
+}
+
+type Option func(o *Options)
+
+func Init(opts ...config.Option) {
+	// 初始化配置
+	config.Init(opts...)
+
+	// 加载依赖配置的插件
+	for _, f := range pluginFuncs {
+		f()
+	}
+}
+
+func Register(f func()) {
+	pluginFuncs = append(pluginFuncs, f)
 }

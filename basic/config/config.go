@@ -1,107 +1,97 @@
 package config
 
 import (
-	"os"
-	"path/filepath"
-	"strings"
+	"fmt"
 	"sync"
 
 	"github.com/micro/go-micro/v2/config"
-	"github.com/micro/go-micro/v2/config/source"
-	"github.com/micro/go-micro/v2/config/source/file"
 	log "github.com/micro/go-micro/v2/logger"
 )
 
 var (
-	err error
+	m      sync.RWMutex
+	inited bool
+
+	// 默认配置器
+	c = &configurator{}
 )
 
-var (
-	defaultRootPath         = "app"
-	defaultConfigFilePrefix = "application-"
-	etcdConfig              defaultEtcdConfig
-	mysqlConfig             defaultMysqlConfig
-	jwtConfig               defaultJwtConfig
-	redisConfig             defaultRedisConfig
-	profiles                defaultProfiles
-	m                       sync.RWMutex
-	inited                  bool
-)
+// Configurator 配置器
+type Configurator interface {
+	App(name string, config interface{}) (err error)
+}
 
-// Init 初始化配置
-func Init() {
+// configurator 配置器
+type configurator struct {
+	conf config.Config
+}
+
+func (c *configurator) App(name string, config interface{}) (err error) {
+
+	v := c.conf.Get(name)
+	if v != nil {
+		err = v.Scan(config)
+	} else {
+		err = fmt.Errorf("[App] 配置不存在，err：%s", name)
+	}
+
+	return
+}
+
+// c 配置器
+func C() Configurator {
+	return c
+}
+
+func (c *configurator) init(ops Options) (err error) {
 	m.Lock()
 	defer m.Unlock()
 
 	if inited {
-		log.Infof("[Init] 配置已经初始化过")
+		log.Info("[init] 配置已经初始化过")
 		return
 	}
 
-	// 加载yml配置
-	// 先加载基础配置
-	appPath, _ := filepath.Abs(filepath.Dir(filepath.Join("./", string(filepath.Separator))))
-
-	pt := filepath.Join(appPath, "conf")
-	_ = os.Chdir(appPath)
-
-	// 找到application.yml文件
-	if err = config.Load(file.NewSource(file.WithPath(pt + "/application.yml"))); err != nil {
-		panic(err)
+	c.conf, _ = config.NewConfig()
+	// 加载配置
+	err = c.conf.Load(ops.Sources...)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	// 找到需要引入的新配置文件
-	if err = config.Get(defaultRootPath, "profiles").Scan(&profiles); err != nil {
-		panic(err)
-	}
+	go func() {
+		log.Info("[init] 侦听配置变动 ...")
 
-	log.Infof("[Init] 加载配置文件：path: %s, %+v\n", pt+"/application.yml", profiles)
-
-	// 开始导入新文件
-	if len(profiles.GetInclude()) > 0 {
-		include := strings.Split(profiles.GetInclude(), ",")
-
-		sources := make([]source.Source, len(include))
-		for i := 0; i < len(include); i++ {
-			filePath := pt + string(filepath.Separator) + defaultConfigFilePrefix + strings.TrimSpace(include[i]) + ".yml"
-
-			log.Infof("[Init] 加载配置文件：path: %s\n", filePath)
-
-			sources[i] = file.NewSource(file.WithPath(filePath))
+		// 开始侦听变动事件
+		watcher, err := c.conf.Watch()
+		if err != nil {
+			log.Fatal(err)
 		}
 
-		// 加载include的文件
-		if err = config.Load(sources...); err != nil {
-			panic(err)
-		}
-	}
+		for {
+			v, err := watcher.Next()
+			if err != nil {
+				log.Fatal(err)
+			}
 
-	// 赋值
-	_ = config.Get(defaultRootPath, "etcd").Scan(&etcdConfig)
-	_ = config.Get(defaultRootPath, "mysql").Scan(&mysqlConfig)
-	_ = config.Get(defaultRootPath, "redis").Scan(&redisConfig)
-	_ = config.Get(defaultRootPath, "jwt").Scan(&jwtConfig)
+			log.Infof("[init] 侦听配置变动: %v", string(v.Bytes()))
+		}
+	}()
 
 	// 标记已经初始化
 	inited = true
+	return
 }
 
-// GetMysqlConfig 获取mysql配置
-func GetMysqlConfig() (ret MysqlConfig) {
-	return mysqlConfig
-}
+// Init 初始化配置
+func Init(opts ...Option) {
 
-// GetEtcdConfig 获取etcd配置
-func GetEtcdConfig() (ret EtcdConfig) {
-	return etcdConfig
-}
+	ops := Options{}
+	for _, o := range opts {
+		o(&ops)
+	}
 
-// GetJwtConfig 获取Jwt配置
-func GetJwtConfig() (ret JwtConfig) {
-	return jwtConfig
-}
+	c = &configurator{}
 
-// GetRedisConfig 获取Redis配置
-func GetRedisConfig() (ret RedisConfig) {
-	return redisConfig
+	c.init(ops)
 }

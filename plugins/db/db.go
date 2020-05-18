@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/zbrechave/tsquare/basic/config"
-
 	log "github.com/micro/go-micro/v2/logger"
+	"github.com/zbrechave/tsquare/basic"
 )
 
 var (
@@ -16,23 +15,24 @@ var (
 	m       sync.RWMutex
 )
 
-// Init 初始化数据库
-func Init() {
+func init() {
+	basic.Register(initDB)
+}
+
+// initDB 初始化数据库
+func initDB() {
 	m.Lock()
 	defer m.Unlock()
 
 	var err error
 
 	if inited {
-		err = fmt.Errorf("[Init] db 已经初始化过")
-		log.Error(err)
+		err = fmt.Errorf("[initDB] db 已经初始化过")
+		log.Info(err)
 		return
 	}
 
-	// 如果配置声明使用mysql
-	if config.GetMysqlConfig().GetEnabled() {
-		initMysql()
-	}
+	initMysql()
 
 	inited = true
 }

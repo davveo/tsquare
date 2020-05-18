@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/micro/go-plugins/config/source/grpc/v2"
+	"github.com/zbrechave/tsquare/basic/common"
 
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2/registry"
@@ -14,19 +16,28 @@ import (
 	"github.com/zbrechave/tsquare/basic"
 )
 
+var (
+	appName = "user_web"
+	cfg     = &userCfg{}
+)
+
+type userCfg struct {
+	common.AppCfg
+}
+
 func main() {
 	// 初始化操作
-	basic.Init()
+	initCfg()
 
 	// 使用etcd注册
 	micReg := etcd.NewRegistry(registryOptions)
 
 	// create new web service
 	service := web.NewService(
-		web.Name("go.micro.web.user"),
-		web.Version("latest"),
+		web.Name(cfg.Name),
+		web.Version(cfg.Version),
 		web.Registry(micReg),
-		web.Address(":8088"),
+		web.Address(cfg.Addr()),
 	)
 
 	// initialise service
@@ -47,7 +58,29 @@ func main() {
 	}
 }
 
+func initCfg() {
+	source := grpc.NewSource(
+		grpc.WithAddress("127.0.0.1:9600"),
+		grpc.WithPath("micro"),
+	)
+
+	basic.Init(config.WithSource(source))
+
+	err := config.C().App(appName, cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Infof("[initCfg] 配置，cfg：%v", cfg)
+
+	return
+}
+
 func registryOptions(ops *registry.Options) {
-	etcdCfg := config.GetEtcdConfig()
-	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.GetHost(), etcdCfg.GetPort())}
+	etcdCfg := &common.Etcd{}
+	err := config.C().App("etcd", etcdCfg)
+	if err != nil {
+		panic(err)
+	}
+	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.Host, etcdCfg.Port)}
 }

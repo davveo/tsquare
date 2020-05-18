@@ -2,7 +2,7 @@ package user
 
 import (
 	log "github.com/micro/go-micro/v2/logger"
-	"github.com/zbrechave/tsquare/basic/db"
+	"github.com/zbrechave/tsquare/plugins/db"
 	proto "github.com/zbrechave/tsquare/srv/user-srv/proto/user"
 )
 

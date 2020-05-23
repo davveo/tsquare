@@ -3,7 +3,6 @@ package handler
 import (
 	"context"
 	"encoding/json"
-	hystrixplugin "github.com/micro/go-plugins/wrapper/breaker/hystrix"
 	"net/http"
 	"time"
 
@@ -11,6 +10,7 @@ import (
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/zbrechave/tsquare/basic/common"
+	hystrixplugins "github.com/zbrechave/tsquare/plugins/breaker/hystrix"
 	"github.com/zbrechave/tsquare/plugins/session"
 	auth "github.com/zbrechave/tsquare/srv/auth-srv/proto/auth"
 	user "github.com/zbrechave/tsquare/srv/user-srv/proto/user"
@@ -29,12 +29,12 @@ type Error struct {
 func Init() {
 	hystrix_go.DefaultVolumeThreshold = 1
 	hystrix_go.DefaultErrorPercentThreshold = 1
-	cl := hystrixplugin.NewClientWrapper()(client.DefaultClient)
-	cl.Init(
+	cl := hystrixplugins.NewClientWrapper()(client.DefaultClient)
+	_ = cl.Init(
 		client.Retries(3),
 		//为了调试看log方便，始终返回true, nil，即会一直重试直至重试次数用尽
 		client.Retry(func(ctx context.Context, req client.Request, retryCount int, err error) (bool, error) {
-			log.Log(req.Method(), retryCount, " client retry")
+			log.Infof(req.Method(), retryCount, " client retry")
 			return true, nil
 		}),
 	)

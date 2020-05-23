@@ -15,7 +15,7 @@ func BreakerWrapper(h http.Handler) http.Handler {
 		name := r.Method + "-" + r.RequestURI
 		_ := hystrix.Do(name, func() error {
 			sct := &statusCode.StatusCodeTracker{ResponseWriter: w, Status: http.StatusOK}
-			h.ServeHTTP(sct.WraBreakerWrapperppedResponseWriter(), r)
+			h.ServeHTTP(sct.WrappedResponseWriter(), r)
 
 			if sct.Status >= http.StatusInternalServerError {
 				str := fmt.Sprintf("status code %d", sct.Status)
@@ -27,7 +27,6 @@ func BreakerWrapper(h http.Handler) http.Handler {
 				w.WriteHeader(http.StatusAccepted)
 				_, _ = w.Write([]byte("请稍后重试"))
 			}
-
 			return e
 		})
 	})

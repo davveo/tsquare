@@ -20,22 +20,6 @@ micro:
     port: 9040
   jwt:
     secretKey: W6VjDud2W1kMG3BicbMNlGgI4ZfcoHtMGLWr
-  orders_srv:
-    name: go.micro.book.srv.orders
-    address: 127.0.0.1
-    port: 9050
-  orders_web:
-    name: go.micro.book.web.orders
-    address: 127.0.0.1
-    port: 9060
-  payment_srv:
-    name: go.micro.book.srv.payment
-    address: 127.0.0.1
-    port: 9070
-  payment_web:
-    name: go.micro.book.web.payment
-    address: 127.0.0.1
-    port: 9080
   redis:
     enabled: true
     conn: 127.0.0.1:6379
@@ -47,10 +31,46 @@ micro:
       master: bookMaster
       nodes: 127.0.0.1:16379,127.0.0.1:26379,127.0.0.1:36379
   user_srv:
-    name: go.micro.book.srv.user
+    name: go.micro.srv.user
     address: 127.0.0.1
     port: 9090
   user_web:
-    name: go.micro.book.web.user
+    name: go.micro.web.user
     address: 127.0.0.1
     port: 10000
+  split_srv:
+    name: go.micro.srv.split
+    address: 127.0.0.1
+    port: 9091
+  sms_srv:
+    name: go.micro.srv.sms
+    address: 127.0.0.1
+    port: 9092
+  senword_srv:
+    name: go.micro.srv.senword
+    address: 127.0.0.1
+    port: 9093
+  recon_srv:
+    name: go.micro.srv.recon
+    address: 127.0.0.1
+    port: 9094
+  question_srv:
+    name: go.micro.srv.question
+    address: 127.0.0.1
+    port: 9095
+  answer_srv:
+    name: go.micro.srv.answer
+    address: 127.0.0.1
+    port: 9096
+  push_srv:
+    name: go.micro.srv.push
+    address: 127.0.0.1
+    port: 9097
+  uuid_srv:
+    name: go.micro.srv.uuid
+    address: 127.0.0.1
+    port: 9098
+  ad_srv:
+    name: go.micro.srv.ad
+    address: 127.0.0.1
+    port: 9099

@@ -19,11 +19,13 @@ var (
 // Configurator 配置器
 type Configurator interface {
 	App(name string, config interface{}) (err error)
+	Path(path string, config interface{}) (err error)
 }
 
 // configurator 配置器
 type configurator struct {
-	conf config.Config
+	conf    config.Config
+	appName string
 }
 
 func (c *configurator) App(name string, config interface{}) (err error) {
@@ -33,6 +35,17 @@ func (c *configurator) App(name string, config interface{}) (err error) {
 		err = v.Scan(config)
 	} else {
 		err = fmt.Errorf("[App] 配置不存在，err：%s", name)
+	}
+
+	return
+}
+
+func (c *configurator) Path(path string, config interface{}) (err error) {
+	v := c.conf.Get(c.appName, path)
+	if v != nil {
+		err = v.Scan(config)
+	} else {
+		err = fmt.Errorf("[Path] 配置不存在，err：%s", path)
 	}
 
 	return

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
 	"github.com/zbrechave/tsquare/basic/common"
+	"go.uber.org/zap"
 
 	"github.com/micro/cli/v2"
 	"github.com/zbrechave/tsquare/srv/auth-srv/model"
@@ -13,8 +14,9 @@ import (
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 
+	z "github.com/zbrechave/tsquare/plugins/zap"
+
 	"github.com/micro/go-micro/v2"
-	log "github.com/micro/go-micro/v2/logger"
 
 	auth "github.com/zbrechave/tsquare/srv/auth-srv/proto/auth"
 
@@ -23,6 +25,7 @@ import (
 )
 
 var (
+	log     = z.GetLogger()
 	appName = "auth_srv"
 	cfg     = &authCfg{}
 )
@@ -62,7 +65,7 @@ func main() {
 
 	// Run service
 	if err := service.Run(); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
 
@@ -79,7 +82,7 @@ func initCfg() {
 		panic(err)
 	}
 
-	log.Infof("[initCfg] 配置，cfg：%v", cfg)
+	log.Info("[initCfg] 配置", zap.Any("cfg", cfg))
 
 	return
 }

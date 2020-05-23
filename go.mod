@@ -16,7 +16,9 @@ require (
 	github.com/micro/go-plugins/config/source/grpc/v2 v2.5.0
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
+	go.uber.org/zap v1.13.0
 	google.golang.org/grpc v1.26.0
 	google.golang.org/protobuf v1.23.0
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 
 )

@@ -3,6 +3,16 @@ micro:
     name: go.micro.book.srv.auth
     address: 127.0.0.1
     port: 9030
+    zap:
+      level: error
+      development: false
+      encoding: json
+      logFileDir:
+      outputPaths: []
+      errorOutputPaths: []
+      maxSize: 50
+      maxBackups: 200
+      maxAge: 10
   etcd:
     enabled: true
     host: 127.0.0.1
@@ -38,6 +48,17 @@ micro:
     name: go.micro.web.user
     address: 127.0.0.1
     port: 10000
+    zap:
+      debugModel: true
+      path:
+      appName: user_web
+      errorFileName: error.log
+      warnFileName: warn.log
+      infoFileName: info.log
+      debugFileName: debug.log
+      maxSize: 50
+      maxBackups: 200
+      maxAge: 10
   split_srv:
     name: go.micro.srv.split
     address: 127.0.0.1

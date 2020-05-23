@@ -4,16 +4,13 @@
 package go_micro_service_auth
 
 import (
+	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
-
-import (
-	context "context"
 	api "github.com/micro/go-micro/v2/api"
 	client "github.com/micro/go-micro/v2/client"
 	server "github.com/micro/go-micro/v2/server"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

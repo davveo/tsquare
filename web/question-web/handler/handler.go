@@ -7,8 +7,17 @@ import (
 	"time"
 
 	"github.com/micro/go-micro/v2/client"
-	question "path/to/service/proto/question"
+	auth "github.com/zbrechave/tsquare/srv/auth-srv/proto/auth"
+	question "github.com/zbrechave/tsquare/srv/question-srv/proto/que"
 )
+
+var (
+	authClient auth.AuthService
+)
+
+func Init()  {
+	questionClient =
+}
 
 func QuestionCall(w http.ResponseWriter, r *http.Request) {
 	// decode the incoming request as json

@@ -31,7 +31,6 @@ type userCfg struct {
 	common.AppCfg
 }
 
-
 func main() {
 	// 初始化配置
 	initCfg()
@@ -64,7 +63,7 @@ func main() {
 	}
 }
 
-func initCfg()  {
+func initCfg() {
 	source := grpc.NewSource(
 		grpc.WithAddress("127.0.0.1:9600"),
 		grpc.WithPath("micro"),
@@ -80,7 +79,6 @@ func initCfg()  {
 
 	return
 }
-
 
 func registryOptions(ops *registry.Options) {
 	etcdCfg := &common.Etcd{}

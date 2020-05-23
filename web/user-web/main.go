@@ -2,18 +2,21 @@ package main
 
 import (
 	"fmt"
-	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/basic/common"
-
+	"github.com/afex/hystrix-go/hystrix"
 	"github.com/micro/cli/v2"
+	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/zbrechave/tsquare/basic/config"
-	"github.com/zbrechave/tsquare/web/user-web/handler"
-
-	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/web"
+	"github.com/micro/go-plugins/config/source/grpc/v2"
 	"github.com/zbrechave/tsquare/basic"
+	"github.com/zbrechave/tsquare/basic/common"
+	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/zbrechave/tsquare/plugins/breaker"
+	"github.com/zbrechave/tsquare/web/user-web/handler"
+	"net"
+	"net/http"
+	"time"
 )
 
 var (
@@ -36,6 +39,8 @@ func main() {
 		web.Version(cfg.Version),
 		web.Registry(micReg),
 		web.Address(cfg.Addr()),
+		web.RegisterTTL(time.Second*15),
+		web.RegisterInterval(time.Second*10),
 	)
 
 	if err := service.Init(
@@ -46,8 +51,16 @@ func main() {
 		log.Fatal(err)
 	}
 
+	handlerLogin := http.HandlerFunc(handler.Login)
+
+	service.Handle("/user/login", breaker.BreakerWrapper(handlerLogin))
+
 	service.HandleFunc("/user/login", handler.Login)
 	service.HandleFunc("/user/logout", handler.Logout)
+
+	hystrixStreamHandler := hystrix.NewStreamHandler()
+	hystrixStreamHandler.Start()
+	go http.ListenAndServe(net.JoinHostPort("", "81"), hystrixStreamHandler)
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)

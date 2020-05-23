@@ -3,9 +3,11 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	hystrixplugin "github.com/micro/go-plugins/wrapper/breaker/hystrix"
 	"net/http"
 	"time"
 
+	hystrix_go "github.com/afex/hystrix-go/hystrix"
 	"github.com/micro/go-micro/v2/client"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/zbrechave/tsquare/basic/common"
@@ -25,8 +27,20 @@ type Error struct {
 }
 
 func Init() {
-	userClient = user.NewUserService("go.micro.service.user", client.DefaultClient)
-	authClient = auth.NewAuthService("go.micro.service.auth", client.DefaultClient)
+	hystrix_go.DefaultVolumeThreshold = 1
+	hystrix_go.DefaultErrorPercentThreshold = 1
+	cl := hystrixplugin.NewClientWrapper()(client.DefaultClient)
+	cl.Init(
+		client.Retries(3),
+		//为了调试看log方便，始终返回true, nil，即会一直重试直至重试次数用尽
+		client.Retry(func(ctx context.Context, req client.Request, retryCount int, err error) (bool, error) {
+			log.Log(req.Method(), retryCount, " client retry")
+			return true, nil
+		}),
+	)
+
+	userClient = user.NewUserService("go.micro.service.user", cl)
+	authClient = auth.NewAuthService("go.micro.service.auth", cl)
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {

@@ -29,10 +29,8 @@ func main() {
 	// 初始化操作
 	initCfg()
 
-	// 使用etcd注册
 	micReg := etcd.NewRegistry(registryOptions)
 
-	// create new web service
 	service := web.NewService(
 		web.Name(cfg.Name),
 		web.Version(cfg.Version),
@@ -40,7 +38,6 @@ func main() {
 		web.Address(cfg.Addr()),
 	)
 
-	// initialise service
 	if err := service.Init(
 		web.Action(func(context *cli.Context) {
 			handler.Init()
@@ -52,7 +49,6 @@ func main() {
 	service.HandleFunc("/user/login", handler.Login)
 	service.HandleFunc("/user/logout", handler.Logout)
 
-	// run service
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
 	}

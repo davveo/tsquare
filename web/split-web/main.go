@@ -4,7 +4,6 @@ import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/web"
 	"github.com/zbrechave/tsquare/web/split-web/handler"
-	"net/http"
 )
 
 func main() {
@@ -16,8 +15,6 @@ func main() {
 	if err := service.Init(); err != nil {
 		log.Fatal(err)
 	}
-
-	service.Handle("/", http.FileServer(http.Dir("html")))
 
 	service.HandleFunc("/split/call", handler.SplitCall)
 

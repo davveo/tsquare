@@ -8,15 +8,17 @@ import (
 
 	"github.com/micro/go-micro/v2/client"
 	auth "github.com/zbrechave/tsquare/srv/auth-srv/proto/auth"
-	question "github.com/zbrechave/tsquare/srv/question-srv/proto/que"
+	question "github.com/zbrechave/tsquare/srv/question-srv/proto/question"
 )
 
 var (
-	authClient auth.AuthService
+	authClient     auth.AuthService
+	questionClient question.QuestionService
 )
 
-func Init()  {
-	questionClient =
+func Init() {
+	authClient = auth.NewAuthService("go.micro.service.auth", client.DefaultClient)
+	questionClient = question.NewQuestionService("go.micro.service.question", client.DefaultClient)
 }
 
 func QuestionCall(w http.ResponseWriter, r *http.Request) {

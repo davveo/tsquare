@@ -3,15 +3,15 @@ package main
 import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"recom-srv/handler"
+	"sms-srv/handler"
 
-	recom "recom-srv/proto/recom"
+	sms "sms-srv/proto/sms"
 )
 
 func main() {
 	// New Service
 	service := micro.NewService(
-		micro.Name("go.micro.service.recom"),
+		micro.Name("go.micro.service.sms"),
 		micro.Version("latest"),
 	)
 
@@ -19,7 +19,7 @@ func main() {
 	service.Init()
 
 	// Register Handler
-	recom.RegisterRecomHandler(service.Server(), new(handler.Recom))
+	sms.RegisterSmsHandler(service.Server(), new(handler.Sms))
 
 	// Run service
 	if err := service.Run(); err != nil {

@@ -13,7 +13,7 @@ import (
 func BreakerWrapper(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		name := r.Method + "-" + r.RequestURI
-		_ := hystrix.Do(name, func() error {
+		_ = hystrix.Do(name, func() error {
 			sct := &statusCode.StatusCodeTracker{ResponseWriter: w, Status: http.StatusOK}
 			h.ServeHTTP(sct.WrappedResponseWriter(), r)
 

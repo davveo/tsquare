@@ -55,7 +55,6 @@ func main() {
 
 	service.Handle("/user/login", breaker.BreakerWrapper(handlerLogin))
 
-	service.HandleFunc("/user/login", handler.Login)
 	service.HandleFunc("/user/logout", handler.Logout)
 
 	hystrixStreamHandler := hystrix.NewStreamHandler()

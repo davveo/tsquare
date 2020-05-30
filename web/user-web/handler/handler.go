@@ -39,8 +39,8 @@ func Init() {
 		}),
 	)
 
-	userClient = user.NewUserService("go.micro.service.user", cl)
-	authClient = auth.NewAuthService("go.micro.service.auth", cl)
+	userClient = user.NewUserService("go.micro.srv.user", cl)
+	authClient = auth.NewAuthService("go.micro.srv.auth", cl)
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {

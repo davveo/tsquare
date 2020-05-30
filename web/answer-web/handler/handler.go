@@ -19,7 +19,7 @@ func AnswerCall(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// call the backend service
-	answerClient := answer.NewAnswerService("go.micro.service.answer", client.DefaultClient)
+	answerClient := answer.NewAnswerService("go.micro.srv.answer", client.DefaultClient)
 	rsp, err := answerClient.Call(context.TODO(), &answer.Request{
 		Name: request["name"].(string),
 	})

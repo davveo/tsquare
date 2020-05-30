@@ -19,7 +19,7 @@ func SplitCall(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// call the backend service
-	splitClient := split.NewSplitService("go.micro.service.split", client.DefaultClient)
+	splitClient := split.NewSplitService("go.micro.srv.split", client.DefaultClient)
 	rsp, err := splitClient.Call(context.TODO(), &split.Request{
 		Name: request["name"].(string),
 	})

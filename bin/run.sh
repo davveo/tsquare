@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
-./conf-srv
-./auth-srv --registry=etcd
-./user-srv --registry=etcd
+micro --registry=etcd  api --handler=http
+
+../build/userApi  --registry=etcd
+../build/confSrv  --registry=etcd
+../build/authSrv  --registry=etcd
+../build/userSrv  --registry=etcd

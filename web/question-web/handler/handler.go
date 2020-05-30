@@ -14,8 +14,8 @@ var (
 )
 
 func Init() {
-	authClient = auth.NewAuthService("go.micro.service.auth", client.DefaultClient)
-	questionClient = question.NewQuestionService("go.micro.service.question", client.DefaultClient)
+	authClient = auth.NewAuthService("go.micro.srv.auth", client.DefaultClient)
+	questionClient = question.NewQuestionService("go.micro.srv.question", client.DefaultClient)
 }
 
 func QuestionCall(w http.ResponseWriter, r *http.Request) {

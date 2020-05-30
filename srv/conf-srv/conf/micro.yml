@@ -1,6 +1,6 @@
 micro:
   auth_srv:
-    name: go.micro.book.srv.auth
+    name: go.micro.srv.auth
     address: 127.0.0.1
     port: 9030
     zap:
@@ -24,10 +24,6 @@ micro:
       maxIdleConnection: 100
       maxOpenConnection: 130
       connMaxLifetime: 100
-  inv_srv:
-    name: go.micro.book.srv.inventory
-    address: 127.0.0.1
-    port: 9040
   jwt:
     secretKey: W6VjDud2W1kMG3BicbMNlGgI4ZfcoHtMGLWr
   redis:
@@ -52,6 +48,21 @@ micro:
       debugModel: true
       path:
       appName: user_web
+      errorFileName: error.log
+      warnFileName: warn.log
+      infoFileName: info.log
+      debugFileName: debug.log
+      maxSize: 50
+      maxBackups: 200
+      maxAge: 10
+  user_api:
+    name: go.micro.api.user
+    address: 127.0.0.1
+    port: 10001
+    zap:
+      debugModel: true
+      path:
+      appName: user_api
       errorFileName: error.log
       warnFileName: warn.log
       infoFileName: info.log

@@ -1,6 +1,7 @@
 package session
 
 import (
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
 	"time"
@@ -22,11 +23,11 @@ func init() {
 }
 
 // GetSession 获取当前会话session
-func GetSession(w http.ResponseWriter, r *http.Request) *sessions.Session {
+func GetSession(ctx *gin.Context) *sessions.Session {
 	// sessionId
 	var sId string
 
-	for _, c := range r.Cookies() {
+	for _, c := range ctx.Request.Cookies() {
 		if strings.Index(c.Name, sessionIdNamePrefix) == 0 {
 			sId = c.Name
 			break
@@ -39,17 +40,23 @@ func GetSession(w http.ResponseWriter, r *http.Request) *sessions.Session {
 	}
 
 	// 忽略错误，因为Get方法会一直都返回session
-	ses, _ := store.Get(r, sId)
+	ses, _ := store.Get(ctx.Request, sId)
 
 	// 没有id说明是新session
 	if ses.ID == "" {
 		// 将sessionId设置到cookie中
-		cookie := &http.Cookie{Name: sId, Value: sId, Path: "/", Expires: time.Now().Add(30 * time.Second), MaxAge: 0}
-		http.SetCookie(w, cookie)
+		cookie := &http.Cookie{
+			Name: sId,
+			Value: sId,
+			Path: "/",
+			Expires: time.Now().Add(30 * time.Second),
+			MaxAge: 0,
+		}
+		http.SetCookie(ctx.Writer, cookie)
 
 		// 保存新的session
 		ses.ID = sId
-		_ = ses.Save(r, w)
+		_ = ses.Save(ctx.Request, ctx.Writer)
 	}
 	return ses
 }

@@ -1,18 +1,4 @@
 micro:
-  auth_srv:
-    name: go.micro.srv.auth
-    address: 127.0.0.1
-    port: 9030
-    zap:
-      level: error
-      development: false
-      encoding: json
-      logFileDir:
-      outputPaths: []
-      errorOutputPaths: []
-      maxSize: 50
-      maxBackups: 200
-      maxAge: 10
   etcd:
     enabled: true
     host: 127.0.0.1
@@ -36,33 +22,29 @@ micro:
       enabled: false
       master: bookMaster
       nodes: 127.0.0.1:16379,127.0.0.1:26379,127.0.0.1:36379
+
+  auth_srv:
+    name: go.micro.srv.auth
+    address: 127.0.0.1
+    port: 9030
+    zap:
+      level: error
+      development: false
+      encoding: json
+      logFileDir:
+      outputPaths: []
+      errorOutputPaths: []
+      maxSize: 50
+      maxBackups: 200
+      maxAge: 10
   user_srv:
     name: go.micro.srv.user
     address: 127.0.0.1
     port: 9090
-  user_web:
-    name: go.micro.web.user
-    address: 127.0.0.1
-    port: 10000
     zap:
       debugModel: true
       path:
       appName: user_web
-      errorFileName: error.log
-      warnFileName: warn.log
-      infoFileName: info.log
-      debugFileName: debug.log
-      maxSize: 50
-      maxBackups: 200
-      maxAge: 10
-  user_api:
-    name: go.micro.api.user
-    address: 127.0.0.1
-    port: 10001
-    zap:
-      debugModel: true
-      path:
-      appName: user_api
       errorFileName: error.log
       warnFileName: warn.log
       infoFileName: info.log
@@ -106,3 +88,49 @@ micro:
     name: go.micro.srv.ad
     address: 127.0.0.1
     port: 9099
+
+  user_api:
+    name: go.micro.api.user
+    address: 127.0.0.1
+    port: 10001
+    zap:
+      debugModel: true
+      path:
+      appName: user_api
+      errorFileName: error.log
+      warnFileName: warn.log
+      infoFileName: info.log
+      debugFileName: debug.log
+      maxSize: 50
+      maxBackups: 200
+      maxAge: 10
+  answer_api:
+    name: go.micro.api.answer
+    address: 127.0.0.1
+    port: 10002
+    zap:
+      debugModel: true
+      path:
+      appName: answer_api
+      errorFileName: answer_error.log
+      warnFileName: answer_warn.log
+      infoFileName: answer_info.log
+      debugFileName: answer_debug.log
+      maxSize: 50
+      maxBackups: 200
+      maxAge: 10
+  question_api:
+    name: go.micro.api.question
+    address: 127.0.0.1
+    port: 10003
+    zap:
+      debugModel: true
+      path:
+      appName: question_api
+      errorFileName: question_error.log
+      warnFileName: question_warn.log
+      infoFileName: question_info.log
+      debugFileName: question_debug.log
+      maxSize: 50
+      maxBackups: 200
+      maxAge: 10

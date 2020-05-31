@@ -9,7 +9,7 @@ import (
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/web"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/api/user/handler"
+	"github.com/zbrechave/tsquare/api/answer/handler"
 	"github.com/zbrechave/tsquare/basic"
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
@@ -18,21 +18,26 @@ import (
 
 
 var (
-	appName = "user_api"
-	cfg     = &userCfg{}
+	appName = "answer_api"
+	cfg     = &answerCfg{}
 )
 
-type userCfg struct {
+type answerCfg struct {
 	common.AppCfg
 }
 
 func main() {
+	// 初始化配置
 	initCfg()
-	router := gin.Default()
-	user := new(handler.User)
-	router.POST("/user/login", user.Login)
-	router.POST("/logout", user.Logout)
+
+	// 使用etcd注册中心
 	micReg := etcd.NewRegistry(registryOptions)
+
+	// 初始化gin
+	router := gin.Default()
+	answer := new(handler.Answer)
+	router.POST("/user/login", answer.Call)
+
 
 	service := web.NewService(
 		web.Name(cfg.Name),
@@ -75,9 +80,7 @@ func initCfg() {
 	return
 }
 
-
 func registryOptions(ops *registry.Options) {
-
 	etcdCfg := &common.Etcd{}
 	err := config.C().App("etcd", etcdCfg)
 	if err != nil {

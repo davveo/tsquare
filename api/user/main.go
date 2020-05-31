@@ -32,6 +32,9 @@ type userCfg struct {
 func main() {
 	initCfg()
 	router := gin.Default()
+	user := new(handler.User)
+	router.POST("/user/login", user.Login)
+	router.POST("/logout", user.Logout)
 	micReg := etcd.NewRegistry(registryOptions)
 
 	service := web.NewService(
@@ -39,6 +42,7 @@ func main() {
 		web.Version(cfg.Version),
 		web.Registry(micReg),
 		web.Address(cfg.Addr()),
+		web.Handler(router),
 		web.RegisterTTL(time.Second*15),
 		web.RegisterInterval(time.Second*10),
 	)
@@ -50,13 +54,6 @@ func main() {
 	); err != nil {
 		log.Fatal(err)
 	}
-
-	user := new(handler.User)
-
-	router.POST("/user/login", user.Login)
-	router.POST("/logout", user.Logout)
-
-	service.Handle("/", router)
 
 	hystrixStreamHandler := hystrix.NewStreamHandler()
 	hystrixStreamHandler.Start()

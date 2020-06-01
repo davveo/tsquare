@@ -1,55 +1,14 @@
 # Sms Service
 
-This is the Sms service
+## 短信发送服务
+    只关注短信的发送，不关心业务。
 
-Generated with
+    对接所有第三短信平台。
 
-```
-micro new --namespace=go.micro --type=service sms-srv
-```
+    提供统一的短信发送接口。
 
-## Getting Started
-
-- [Configuration](#configuration)
-- [Dependencies](#dependencies)
-- [Usage](#usage)
-
-## Configuration
-
-- FQDN: go.micro.service.sms
-- Type: service
-- Alias: sms
-
-## Dependencies
-
-Micro services depend on service discovery. The default is multicast DNS, a zeroconf system.
-
-In the event you need a resilient multi-host setup we recommend etcd.
-
-```
-# install etcd
-brew install etcd
-
-# run etcd
-etcd
-```
-
-## Usage
-
-A Makefile is included for convenience
-
-Build the binary
-
-```
-make build
-```
-
-Run the service
-```
-./sms-service
-```
-
-Build a docker image
-```
-make docker
-```
+    插拔式短信服务
+    
+ ## TODO
+   - 配置动态获取
+   - 兼容所有第三方短信发送

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
@@ -11,14 +12,16 @@ import (
 	"github.com/zbrechave/tsquare/basic"
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
+	sms_config "github.com/zbrechave/tsquare/srv/sms-srv/config"
 
 	"github.com/zbrechave/tsquare/srv/sms-srv/handler"
 	sms "github.com/zbrechave/tsquare/srv/sms-srv/proto/sms"
 )
 
 var (
-	appName = "sms_srv"
-	cfg = &smsCfg{}
+	appName   = "sms_srv"
+	cfg       = &smsCfg{}
+	smsconfig sms_config.Config
 )
 
 type smsCfg struct {
@@ -28,6 +31,13 @@ type smsCfg struct {
 func main() {
 	// 初始化配置
 	initCfg()
+
+	// 初始化短信配置
+	if err := smsconfig.ParseConfigFile("conf/conf.yaml"); err != nil {
+		fmt.Printf("%s\n%s", "Unable to load config info!", err)
+		panic(err)
+	}
+
 	// 使用etcd注册
 	micReg := etcd.NewRegistry(registryOptions)
 	// New Service

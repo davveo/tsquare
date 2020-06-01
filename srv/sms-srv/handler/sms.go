@@ -3,46 +3,28 @@ package handler
 import (
 	"context"
 
+	//"github.com/zbrechave/tsquare/srv/sms-srv/provider"
+
 	log "github.com/micro/go-micro/v2/logger"
 
-	sms "sms-srv/proto/sms"
+	sms_proto "github.com/zbrechave/tsquare/srv/sms-srv/proto/sms"
 )
 
 type Sms struct{}
 
-// Call is a single request handler called via client.Call or the generated client code
-func (e *Sms) Call(ctx context.Context, req *sms.Request, rsp *sms.Response) error {
-	log.Info("Received Sms.Call request")
-	rsp.Msg = "Hello " + req.Name
-	return nil
-}
+func (s *Sms) Send(ctx context.Context, req *sms_proto.Request, rsp *sms_proto.Response) error {
+	log.Info("Received Sms.Send request")
 
-// Stream is a server side stream handler called via client.Stream or the generated client code
-func (e *Sms) Stream(ctx context.Context, req *sms.StreamingRequest, stream sms.Sms_StreamStream) error {
-	log.Infof("Received Sms.Stream request with count: %d", req.Count)
-
-	for i := 0; i < int(req.Count); i++ {
-		log.Infof("Responding: %d", i)
-		if err := stream.Send(&sms.StreamingResponse{
-			Count: int64(i),
-		}); err != nil {
-			return err
-		}
-	}
+	//err := provider.Sender()
+	//
+	//if err != nil {
+	//	rsp.Error = &sms_proto.Error{
+	//		Code:   500,
+	//		Detail: err.Error(),
+	//	}
+	//
+	//	return nil
+	//}
 
 	return nil
-}
-
-// PingPong is a bidirectional stream handler called via client.Stream or the generated client code
-func (e *Sms) PingPong(ctx context.Context, stream sms.Sms_PingPongStream) error {
-	for {
-		req, err := stream.Recv()
-		if err != nil {
-			return err
-		}
-		log.Infof("Got ping %v", req.Stroke)
-		if err := stream.Send(&sms.Pong{Stroke: req.Stroke}); err != nil {
-			return err
-		}
-	}
 }

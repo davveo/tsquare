@@ -1,0 +1,58 @@
+timezone: PRC       #时区设置
+timeout: 5          #短信供应商网关响应超时时间（秒）
+vendors:
+  alidayu:          #阿里大鱼配置 http://www.alidayu.com
+    appkey: 8329123423
+    appSecret: 24812943218123
+    issendbox: false
+  yuntongxun:      #云通讯配置  http://www.yuntongxun.com/
+    AccountSid: 242149423423
+    AccountToken: 242149423423
+    AppId: 242149423423
+    SoftVersion: 2020-04-16
+    RestURL: https://app.cloopen.com:8883
+  hywx:           #互亿无线  http://www.ihuyi.cn/
+    account: 242149423423
+    password: 242149423423
+    RestURL: http://106.ihuyi.cn/webservice/sms.php?method=Submit
+
+servicelist:
+  "register":
+    vendor: alidayu  #短信通道供应商
+    group:  db1   #相同组内的uid数据共享
+    smstpl: SMS_34850248  #阿里大鱼短信模板id
+    signname: test #阿里大鱼短信签名
+    callback: "http://127.0.01/test9.php"
+    allowcitys: #仅限如下的手机号归属区接收验证码
+      - 0575
+      - 0571
+      - 0574
+    maxsendnums: 4   #一个手机号每天发送限额,这个受短信运营商的限制。
+    validtime: 600  #单位：秒 。 收到的手机验证码x秒内有效，超过后验证无效；
+    mode: 2   #模式  1：只有手机号对应的uid存在时才能发送，2：只有uid不存在时才能发送，3：不管uid是否存在都发送
+    outformat: mobcent  #RestAPi接口输出样式（mobcent,default）
+
+  "restpwd":
+    vendor: alidayu
+    group: db1
+    smstpl: SMS_39190087
+    signname: test
+    callback:
+    allowcitys:
+      - 0578
+    maxsendnums: 2
+    validtime: 360
+    mode: 3
+
+  "getpwd":
+    vendor: yuntongxun
+    group: db1
+    smstpl: 149350
+    signname: test
+    callback:
+    allowcitys:
+      - 0578
+      - 0575
+    maxsendnums: 2
+    validtime: 360
+    mode: 3

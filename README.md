@@ -1,70 +1,39 @@
 ## tsquare
 ### 项目架构图
 ![项目架构图](https://github.com/zbrechave/tsquare/blob/master/docs/项目架构图.jpg)
-### 项目启动顺序
-  1. 启动服务
-  ```bash
-    # 启动consul
-    docker run --name consul -d -p 8500:8500/tcp consul:latest agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
-    
-    # 启动hystrix监控
-    docker run --name hystrix-dashboard -d -p 8081:9002 mlabouardy/hystrix-dashboard:latest
-    # 访问地址:  http://localhost:8081/hystrix.stream
-    # 输入ip访问监控: http://{ip}:81/hystrix.stream {ip}为本机ip
-    
-    # 启动mysql
-    docker run --name mysql -e MYSQL_ROOT_PASSWORD=123 -d -p 3306:3306 mysql
-    
-    # 启动jaeger链路追踪
-    docker run -d --name jaeger -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 -p 9411:9411 jaegertracing/all-in-one:1.6
-    
-    # 启动prometheus监控
-    docker run --name prometheus -d -p 0.0.0.0:9090:9090 -v ~/tmp/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus     
-  ```
-  ```yml
-  # prometheus.yml
-  global:
-    scrape_interval: 15s
-    scrape_timeout: 10s
-    evaluation_interval: 15s
-  alerting:
-    alertmanagers:
-    - static_configs:
-      - targets: []
-      scheme: http
-      timeout: 10s
-  scrape_configs:
-  - job_name: APIGW
-    honor_timestamps: true
-    scrape_interval: 15s
-    scrape_timeout: 10s
-    metrics_path: /metrics
-    scheme: http
-    static_configs:
-    - targets:
-      - 10.104.34.106:8080   #10.104.34.106为本机ip， 本机127.0.0.1在容器中无法访问到
+### 项目启动
+```bash
+> cd bin
+> sh build.sh
+```
+###项目规划
+ - 四周左右时间完善底层基础服务: 如: 短信服务, 用户服务, 认证服务, UUID服务, 问题/回答服务...
+ - 两周左右时间完成api服务: 如: user-api, answer-api...
+ - 一周左右时间完成上述调试
+ 
+### 项目技术点
+ - 分布式session解决方案
+ - 分布式UUID解决方案
+ - 分布书搜索解决方案
+ - 分布式缓存解决方案
+ - 分布式配置管理
+ - 分布式链路追踪
+ - 持续集成/容器化技术
+ - 消息队列(rabbitmq/kafka)等
+ 
+### 说明
+#### 分布式session解决方案
+  > 解决多服务之间, 用户身份识别。
 
-   ```
-  1. 启动api-gateway
-  ```bash
-    cd api
-    make run
-  ```
-  2. 启动各个srv
-  ```bash
-    // 启动认证服务
-    cd srv/auth-srv
-    make run
-    
-    // 启动用户服务
-    cd srv/user-srv
-    make run
-    
-    ...
-  ```
-    
-### auth-srv
-    认证服务
-    
-### user-srv
-    用户服务
+#### 分布式UUID解决方案
+  > 解决用户ID生成, 问题回答ID生成, 日志ID生成等。
+
+#### 分布书搜索解决方案
+  > 解决问题回答搜索, 招聘信息搜索等
+
+#### 分布式缓存解决方案
+
+#### 分布式配置管理
+ > 管理服务配置
+
+#### 分布式链路追踪

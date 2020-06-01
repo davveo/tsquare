@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2/client"
 	"github.com/zbrechave/tsquare/basic/common"
@@ -11,10 +12,11 @@ import (
 	log "github.com/micro/go-micro/v2/logger"
 	hystrixplugins "github.com/zbrechave/tsquare/plugins/breaker/hystrix"
 
-	auth "github.com/zbrechave/tsquare/srv/auth-srv/proto/auth"
-	user "github.com/zbrechave/tsquare/srv/user-srv/proto/user"
 	"net/http"
 	"time"
+
+	auth "github.com/zbrechave/tsquare/srv/auth/proto/auth"
+	user "github.com/zbrechave/tsquare/srv/user/proto/user"
 )
 
 var (
@@ -26,10 +28,10 @@ type User struct{}
 
 type LoginRequest struct {
 	UserName string `json:"userName"`
-	PassWord    string    `json:"pwd"`
+	PassWord string `json:"pwd"`
 }
 
-func Init()  {
+func Init() {
 	cl := hystrixplugins.NewClientWrapper()(client.DefaultClient)
 
 	_ = cl.Init(
@@ -44,7 +46,6 @@ func Init()  {
 	userService = user.NewUserService("go.micro.srv.user", cl)
 	authService = auth.NewAuthService("go.micro.srv.auth", cl)
 }
-
 
 func (u *User) Login(ctx *gin.Context) {
 	log.Info("Received User.Login request")
@@ -75,9 +76,9 @@ func (u *User) Login(ctx *gin.Context) {
 
 		rsp2, err := authService.MakeAccessToken(
 			context.TODO(), &auth.Request{
-			UserId:   resp.User.Id,
-			UserName: resp.User.Name,
-		})
+				UserId:   resp.User.Id,
+				UserName: resp.User.Name,
+			})
 
 		if err != nil {
 			log.Infof("[Login] 创建token失败，err：%s", err)
@@ -109,7 +110,6 @@ func (u *User) Login(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 
 }
-
 
 func (u *User) Logout(ctx *gin.Context) {
 	log.Info("Received User.Logout request")

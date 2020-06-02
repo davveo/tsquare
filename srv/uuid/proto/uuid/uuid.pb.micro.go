@@ -42,7 +42,7 @@ func NewUuidEndpoints() []*api.Endpoint {
 // Client API for Uuid service
 
 type UuidService interface {
-	Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	GenerateId(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
 type uuidService struct {
@@ -57,8 +57,8 @@ func NewUuidService(name string, c client.Client) UuidService {
 	}
 }
 
-func (c *uuidService) Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "Uuid.Call", in)
+func (c *uuidService) GenerateId(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Uuid.GenerateId", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -70,12 +70,12 @@ func (c *uuidService) Call(ctx context.Context, in *Request, opts ...client.Call
 // Server API for Uuid service
 
 type UuidHandler interface {
-	Call(context.Context, *Request, *Response) error
+	GenerateId(context.Context, *Request, *Response) error
 }
 
 func RegisterUuidHandler(s server.Server, hdlr UuidHandler, opts ...server.HandlerOption) error {
 	type uuid interface {
-		Call(ctx context.Context, in *Request, out *Response) error
+		GenerateId(ctx context.Context, in *Request, out *Response) error
 	}
 	type Uuid struct {
 		uuid
@@ -88,6 +88,6 @@ type uuidHandler struct {
 	UuidHandler
 }
 
-func (h *uuidHandler) Call(ctx context.Context, in *Request, out *Response) error {
-	return h.UuidHandler.Call(ctx, in, out)
+func (h *uuidHandler) GenerateId(ctx context.Context, in *Request, out *Response) error {
+	return h.UuidHandler.GenerateId(ctx, in, out)
 }

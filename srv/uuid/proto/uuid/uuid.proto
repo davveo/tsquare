@@ -3,14 +3,19 @@ syntax = "proto3";
 package go.micro.service.uuid;
 
 service Uuid {
-	rpc Call(Request) returns (Response) {}
+	rpc GenerateId(Request) returns(Response) {}
 }
 
 message Request {
-	string name = 1;
+	int64 nodeId = 1;
+}
+
+message Data {
+	int64 id = 1;
 }
 
 message Response {
-	string msg = 1;
+	int32 code = 1;
+	string msg = 2;
+	Data data = 3;
 }
-

@@ -36,7 +36,7 @@ type IdWorker struct {
 	mutex         sync.Mutex
 }
 
-var NodeID = int64(-1) // Node ID,只能为 0， 1， 2
+var NodeID = int64(-1) // Node ID,只能为 0(暂时支持)， 1， 2
 var idw *IdWorker = nil
 
 // 预生产ID的channel队列
@@ -52,11 +52,13 @@ func GetIdWorker() *IdWorker {
 			go preGen()
 		}
 	}
+	return idw
 }
 
 func newIdWorker(NodeId int64) (*IdWorker, error) {
 	idWorker := &IdWorker{}
-	if NodeId > maxNodeId || NodeId < 0 {
+	// TODO 去掉等号支持0
+	if NodeId > maxNodeId || NodeId <= 0 {
 		fmt.Sprintf("NodeId Id can't be greater than %d or less than 0", maxNodeId)
 		return nil, errors.New(fmt.Sprintf("NodeId Id: %d error", NodeId))
 	}

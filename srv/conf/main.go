@@ -4,15 +4,16 @@ import (
 	"context"
 	"crypto/md5"
 	"fmt"
+	"net"
+	"strings"
+	"sync"
+	"time"
+
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/source/file"
 	log "github.com/micro/go-micro/v2/logger"
 	proto "github.com/micro/go-plugins/config/source/grpc/v2/proto"
 	grpc2 "google.golang.org/grpc"
-	"net"
-	"strings"
-	"sync"
-	"time"
 )
 
 var (
@@ -77,7 +78,7 @@ func loadAndWatchConfigFile() (err error) {
 	// 加载每个应用的配置文件
 	for _, app := range apps {
 		if err := config.Load(file.NewSource(
-			file.WithPath("../srv/conf-srv/conf/" + app + ".yml"),
+			file.WithPath("./conf/" + app + ".yml"),
 		)); err != nil {
 			log.Fatalf("[loadAndWatchConfigFile] 加载应用配置文件 异常，%s", err)
 			return err

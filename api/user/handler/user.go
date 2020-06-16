@@ -2,34 +2,28 @@ package handler
 
 import (
 	"context"
-
+	"github.com/zbrechave/tsquare/api/user/model/request"
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2/client"
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/plugins/session"
-
 	//"github.com/micro/go-micro/v2/errors"
 	log "github.com/micro/go-micro/v2/logger"
 	hystrixplugins "github.com/zbrechave/tsquare/plugins/breaker/hystrix"
-
 	"net/http"
 	"time"
-
 	auth "github.com/zbrechave/tsquare/srv/auth/proto/auth"
+	sms "github.com/zbrechave/tsquare/srv/sms/proto/sms"
 	user "github.com/zbrechave/tsquare/srv/user/proto/user"
 )
 
 var (
 	userService user.UserService
 	authService auth.AuthService
+	smsService sms.SmsService
 )
 
 type User struct{}
-
-type LoginRequest struct {
-	UserName string `json:"userName"`
-	PassWord string `json:"pwd"`
-}
 
 func Init() {
 	cl := hystrixplugins.NewClientWrapper()(client.DefaultClient)
@@ -45,12 +39,13 @@ func Init() {
 
 	userService = user.NewUserService("go.micro.srv.user", cl)
 	authService = auth.NewAuthService("go.micro.srv.auth", cl)
+	smsService = sms.NewSmsService("go.micro.sms.auth", cl)
 }
 
 func (u *User) Login(ctx *gin.Context) {
 	log.Info("Received User.Login request")
 
-	var loginReq LoginRequest
+	var loginReq request.LoginRequest
 	if err := ctx.BindJSON(&loginReq); err != nil {
 		log.Errorf("bind param err: %v", err)
 		ctx.JSON(http.StatusInternalServerError, err.Error())
@@ -139,4 +134,21 @@ func (u *User) Logout(ctx *gin.Context) {
 		"success": true,
 	}
 	ctx.JSON(http.StatusOK, response)
+}
+
+func (u *User) SmsCode(ctx *gin.Context) {
+	log.Info("Received User.SmsCode request")
+	var smsReq request.SmsRequest
+	if err := ctx.BindJSON(&smsReq); err != nil {
+		log.Errorf("bind param err: %v", err)
+		ctx.JSON(http.StatusInternalServerError, err.Error())
+	}
+	if _, err := smsService.Send(context.TODO(), &sms.Request{Mobile: smsReq.Mobile}); err != nil {
+		log.Errorf("call smsService.Send err: %v", err)
+		ctx.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"success": true,
+	})
 }

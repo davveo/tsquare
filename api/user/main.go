@@ -31,7 +31,9 @@ func main() {
 	router := gin.Default()
 	user := new(handler.User)
 	router.POST("/user/login", user.Login)
-	router.POST("/logout", user.Logout)
+	router.POST("/user/logout", user.Logout)
+	router.POST("/user/sms", user.SmsCode)
+
 	micReg := etcd.NewRegistry(registryOptions)
 
 	service := web.NewService(

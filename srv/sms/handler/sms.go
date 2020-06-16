@@ -7,7 +7,6 @@ import (
 	//"github.com/zbrechave/tsquare/srv/sms-srv/provider"
 
 	log "github.com/micro/go-micro/v2/logger"
-
 	sms_proto "github.com/zbrechave/tsquare/srv/sms/proto/sms"
 )
 

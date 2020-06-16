@@ -12,7 +12,6 @@ import (
 	"github.com/zbrechave/tsquare/basic"
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
-	sms_config "github.com/zbrechave/tsquare/srv/sms/config"
 
 	"github.com/zbrechave/tsquare/srv/sms/handler"
 	sms "github.com/zbrechave/tsquare/srv/sms/proto/sms"
@@ -21,7 +20,6 @@ import (
 var (
 	appName   = "sms_srv"
 	cfg       = &smsCfg{}
-	smsconfig sms_config.Config
 )
 
 type smsCfg struct {
@@ -33,10 +31,10 @@ func main() {
 	initCfg()
 
 	// 初始化短信配置
-	if err := smsconfig.ParseConfigFile("conf/conf.yaml"); err != nil {
-		fmt.Printf("%s\n%s", "Unable to load config info!", err)
-		panic(err)
-	}
+	//if err := smsconfig.ParseConfigFile("conf/conf.yaml"); err != nil {
+	//	fmt.Printf("%s\n%s", "Unable to load config info!", err)
+	//	panic(err)
+	//}
 
 	// 使用etcd注册
 	micReg := etcd.NewRegistry(registryOptions)

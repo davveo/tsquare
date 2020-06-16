@@ -78,7 +78,7 @@ func loadAndWatchConfigFile() (err error) {
 	// 加载每个应用的配置文件
 	for _, app := range apps {
 		if err := config.Load(file.NewSource(
-			file.WithPath("./conf/" + app + ".yml"),
+			file.WithPath("../srv/conf/" + app + ".yml"),
 		)); err != nil {
 			log.Fatalf("[loadAndWatchConfigFile] 加载应用配置文件 异常，%s", err)
 			return err

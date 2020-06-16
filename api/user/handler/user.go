@@ -39,7 +39,7 @@ func Init() {
 
 	userService = user.NewUserService("go.micro.srv.user", cl)
 	authService = auth.NewAuthService("go.micro.srv.auth", cl)
-	smsService = sms.NewSmsService("go.micro.sms.auth", cl)
+	smsService = sms.NewSmsService("go.micro.srv.sms", cl)
 }
 
 func (u *User) Login(ctx *gin.Context) {

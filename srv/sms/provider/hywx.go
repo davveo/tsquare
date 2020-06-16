@@ -6,10 +6,9 @@ http://www.ihuyi.cn/
 **/
 
 type Hywx struct {
-	sms *SMS
 }
 
-func (h *Hywx) Send(sms *SMS) error {
+func (h Hywx) Send(sms *SMS) error {
 
 	return nil
 }

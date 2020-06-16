@@ -6,10 +6,9 @@ http://www.ihuyi.cn/
 **/
 
 type Alidayu struct {
-	sms *SMS
 }
 
-func (ali *Alidayu) Send(sms *SMS) error {
+func (ali Alidayu) Send(sms *SMS) error {
 
 	return nil
 }

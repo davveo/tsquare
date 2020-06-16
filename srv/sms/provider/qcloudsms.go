@@ -5,9 +5,8 @@ package provider
 */
 
 type QcloudSms struct {
-	sms *SMS
 }
 
-func (qcloud *QcloudSms) Send(sms *SMS) error {
+func (qcloud QcloudSms) Send(sms *SMS) error {
 	return nil
 }

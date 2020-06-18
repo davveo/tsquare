@@ -24,6 +24,8 @@ require (
 	github.com/micro/go-plugins/registry/consul/v2 v2.5.0
 	github.com/micro/micro/v2 v2.7.0
 	github.com/opensource-conet/alidayu v0.0.0-20160504013805-9c045758d571 // indirect
+	github.com/rakyll/hey v0.1.3 // indirect
+	github.com/streadway/amqp v1.0.0
 	go.uber.org/zap v1.13.0
 	google.golang.org/grpc v1.26.0
 	google.golang.org/protobuf v1.23.0

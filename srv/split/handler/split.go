@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	split "split-srv/proto/split"
+	split "github.com/zbrechave/tsquare/srv/split/proto/split"
 )
 
 type Split struct{}

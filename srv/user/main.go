@@ -20,7 +20,7 @@ import (
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 
-	user "github.com/zbrechave/tsquare/srv/user/proto/user"
+	user "github.com/zbrechave/tsquare/proto/user"
 )
 
 var (

@@ -13,13 +13,13 @@ import (
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
 
+	sms "github.com/zbrechave/tsquare/proto/sms"
 	"github.com/zbrechave/tsquare/srv/sms/handler"
-	sms "github.com/zbrechave/tsquare/srv/sms/proto/sms"
 )
 
 var (
-	appName   = "sms_srv"
-	cfg       = &smsCfg{}
+	appName = "sms_srv"
+	cfg     = &smsCfg{}
 )
 
 type smsCfg struct {

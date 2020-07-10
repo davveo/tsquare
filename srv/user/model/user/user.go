@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	proto "github.com/zbrechave/tsquare/srv/user/proto/user"
+	proto "github.com/zbrechave/tsquare/proto/user"
 )
 
 var (

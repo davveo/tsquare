@@ -4,8 +4,8 @@ import (
 	"context"
 
 	log "github.com/micro/go-micro/v2/logger"
+	user_proto "github.com/zbrechave/tsquare/proto/user"
 	us "github.com/zbrechave/tsquare/srv/user/model/user"
-	user_proto "github.com/zbrechave/tsquare/srv/user/proto/user"
 )
 
 type User struct{}

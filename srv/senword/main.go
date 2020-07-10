@@ -13,8 +13,8 @@ import (
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
 
+	senword "github.com/zbrechave/tsquare/proto/senword"
 	"github.com/zbrechave/tsquare/srv/senword/handler"
-	senword "github.com/zbrechave/tsquare/srv/senword/proto/senword"
 )
 
 var (

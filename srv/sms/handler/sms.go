@@ -3,15 +3,16 @@ package handler
 import (
 	"context"
 	"fmt"
+	"net/http"
+
 	"github.com/zbrechave/tsquare/lib/redis"
 	"github.com/zbrechave/tsquare/srv/sms/provider"
 	"github.com/zbrechave/tsquare/srv/sms/utils"
-	"net/http"
 
 	//"github.com/zbrechave/tsquare/srv/sms-srv/provider"
 
 	log "github.com/micro/go-micro/v2/logger"
-	sms_proto "github.com/zbrechave/tsquare/srv/sms/proto/sms"
+	sms_proto "github.com/zbrechave/tsquare/proto/sms"
 )
 
 type Sms struct{}
@@ -21,7 +22,7 @@ func (s *Sms) Send(ctx context.Context, req *sms_proto.Request, rsp *sms_proto.R
 
 	rds := redis.RedisPool.Get()
 	code := utils.GenVerificationCode()
-	mobileCodeStr := fmt.Sprintf("mobile:%s" , req.Mobile)
+	mobileCodeStr := fmt.Sprintf("mobile:%s", req.Mobile)
 	if _, err := rds.Do("SET", mobileCodeStr, code); err != nil {
 		rsp.Error = &sms_proto.Error{
 			Code:   http.StatusInternalServerError,
@@ -32,7 +33,7 @@ func (s *Sms) Send(ctx context.Context, req *sms_proto.Request, rsp *sms_proto.R
 
 	sms := provider.SMS{
 		Mobile: req.Mobile,
-		Code: code,
+		Code:   code,
 	}
 
 	err := provider.Alidayu{}.Send(&sms)

@@ -2,25 +2,28 @@ package handler
 
 import (
 	"context"
-	"github.com/zbrechave/tsquare/api/user/model/request"
+
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2/client"
+	"github.com/zbrechave/tsquare/api/user/model/request"
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/plugins/session"
+
 	//"github.com/micro/go-micro/v2/errors"
-	log "github.com/micro/go-micro/v2/logger"
-	hystrixplugins "github.com/zbrechave/tsquare/plugins/breaker/hystrix"
 	"net/http"
 	"time"
-	auth "github.com/zbrechave/tsquare/srv/auth/proto/auth"
+
+	log "github.com/micro/go-micro/v2/logger"
+	hystrixplugins "github.com/zbrechave/tsquare/plugins/breaker/hystrix"
+	auth "github.com/zbrechave/tsquare/proto/auth"
+	user "github.com/zbrechave/tsquare/proto/user"
 	sms "github.com/zbrechave/tsquare/srv/sms/proto/sms"
-	user "github.com/zbrechave/tsquare/srv/user/proto/user"
 )
 
 var (
 	userService user.UserService
 	authService auth.AuthService
-	smsService sms.SmsService
+	smsService  sms.SmsService
 )
 
 type User struct{}

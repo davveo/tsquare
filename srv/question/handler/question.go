@@ -4,7 +4,7 @@ import (
 	"context"
 
 	log "github.com/micro/go-micro/v2/logger"
-	proto "github.com/zbrechave/tsquare/srv/question/proto/question"
+	proto "github.com/zbrechave/tsquare/proto/question"
 )
 
 type QuestionService struct{}

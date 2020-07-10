@@ -5,8 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	senword "github.com/zbrechave/tsquare/srv/senword/proto/senword"
-	utils "github.com/zbrechave/tsquare/srv/senword/utils"
+	senword "github.com/zbrechave/tsquare/proto/senword"
 )
 
 type Senword struct{}
@@ -18,7 +17,6 @@ func (e *Senword) Call(ctx context.Context, req *senword.Request, rsp *senword.R
 	//var filterbyte [][]byte
 	//tree.InitRootNode()
 	//tree.BuildTrie(filterbyte)
-
 
 	return nil
 }

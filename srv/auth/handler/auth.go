@@ -6,8 +6,8 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
+	auth "github.com/zbrechave/tsquare/proto/auth"
 	"github.com/zbrechave/tsquare/srv/auth/model/access"
-	auth "github.com/zbrechave/tsquare/srv/auth/proto/auth"
 )
 
 var (

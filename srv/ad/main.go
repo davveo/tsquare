@@ -13,8 +13,8 @@ import (
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
 
+	ad "github.com/zbrechave/tsquare/proto/ad"
 	"github.com/zbrechave/tsquare/srv/ad/handler"
-	ad "github.com/zbrechave/tsquare/srv/ad/proto/ad"
 )
 
 var (

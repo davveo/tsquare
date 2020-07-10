@@ -19,7 +19,7 @@ import (
 
 	"github.com/micro/go-micro/v2"
 
-	auth "github.com/zbrechave/tsquare/srv/auth/proto/auth"
+	auth "github.com/zbrechave/tsquare/proto/auth"
 
 	"github.com/zbrechave/tsquare/basic"
 	"github.com/zbrechave/tsquare/basic/config"

@@ -13,8 +13,8 @@ import (
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
 
+	split "github.com/zbrechave/tsquare/proto/split"
 	"github.com/zbrechave/tsquare/srv/split/handler"
-	split "github.com/zbrechave/tsquare/srv/split/proto/split"
 )
 
 var (

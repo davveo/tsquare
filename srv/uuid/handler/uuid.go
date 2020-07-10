@@ -6,7 +6,7 @@ import (
 
 	"github.com/zbrechave/tsquare/srv/uuid/idworker"
 
-	uuid_proto "github.com/zbrechave/tsquare/srv/uuid/proto/uuid"
+	uuid_proto "github.com/zbrechave/tsquare/proto/uuid"
 )
 
 type Uuid struct{}

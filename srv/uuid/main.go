@@ -13,8 +13,8 @@ import (
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/basic/config"
 
+	uuid "github.com/zbrechave/tsquare/proto/uuid"
 	"github.com/zbrechave/tsquare/srv/uuid/handler"
-	uuid "github.com/zbrechave/tsquare/srv/uuid/proto/uuid"
 )
 
 var (

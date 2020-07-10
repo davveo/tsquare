@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	push "github.com/zbrechave/tsquare/srv/push/proto/push"
+	push "github.com/zbrechave/tsquare/proto/push"
 )
 
 type Push struct{}

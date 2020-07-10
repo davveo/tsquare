@@ -5,6 +5,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"net"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -20,6 +21,7 @@ var (
 	mux        sync.RWMutex
 	configMaps = make(map[string]*proto.ChangeSet)
 	apps       = []string{"micro"}
+	baseDir, _ = os.Getwd()
 )
 
 type Service struct{}
@@ -77,8 +79,10 @@ func (s Service) Watch(req *proto.WatchRequest, server proto.Source_WatchServer)
 func loadAndWatchConfigFile() (err error) {
 	// 加载每个应用的配置文件
 	for _, app := range apps {
+
+		fmt.Println(os.Getwd())
 		if err := config.Load(file.NewSource(
-			file.WithPath("../srv/conf/" + app + ".yml"),
+			file.WithPath(baseDir + "/config/" + app + ".yml"),
 		)); err != nil {
 			log.Fatalf("[loadAndWatchConfigFile] 加载应用配置文件 异常，%s", err)
 			return err

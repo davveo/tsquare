@@ -5,6 +5,7 @@ import (
 	"encoding/gob"
 	"github.com/gin-gonic/gin"
 	"github.com/gomodule/redigo/redis"
+	"log"
 	"time"
 )
 

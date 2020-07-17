@@ -2,28 +2,25 @@ package handler
 
 import (
 	"context"
-
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2/client"
 	"github.com/zbrechave/tsquare/api/user/model/request"
 	"github.com/zbrechave/tsquare/basic/common"
 	"github.com/zbrechave/tsquare/plugins/session"
-
 	//"github.com/micro/go-micro/v2/errors"
-	"net/http"
-	"time"
-
 	log "github.com/micro/go-micro/v2/logger"
 	hystrixplugins "github.com/zbrechave/tsquare/plugins/breaker/hystrix"
-	auth "github.com/zbrechave/tsquare/proto/auth"
-	user "github.com/zbrechave/tsquare/proto/user"
+	auth "github.com/zbrechave/tsquare/srv/auth/proto/auth"
 	sms "github.com/zbrechave/tsquare/srv/sms/proto/sms"
+	user "github.com/zbrechave/tsquare/srv/user/proto/user"
+	"net/http"
+	"time"
 )
 
 var (
+	smsService sms.SmsService
 	userService user.UserService
 	authService auth.AuthService
-	smsService  sms.SmsService
 )
 
 type User struct{}
@@ -40,9 +37,9 @@ func Init() {
 		}),
 	)
 
+	smsService = sms.NewSmsService("go.micro.srv.sms", cl)
 	userService = user.NewUserService("go.micro.srv.user", cl)
 	authService = auth.NewAuthService("go.micro.srv.auth", cl)
-	smsService = sms.NewSmsService("go.micro.srv.sms", cl)
 }
 
 func (u *User) Login(ctx *gin.Context) {

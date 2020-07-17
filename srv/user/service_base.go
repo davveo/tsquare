@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	proto "github.com/zbrechave/tsquare/proto/user"
+	"github.com/jinzhu/gorm"
 )
 
 var (
@@ -14,12 +14,7 @@ var (
 
 // service 服务
 type service struct {
-}
-
-// Service 用户服务类
-type Service interface {
-	// QueryUserByName 根据用户名获取用户
-	QueryUserByName(userName string) (ret *proto.User, err error)
+	db *gorm.DB
 }
 
 // GetService 获取服务类
@@ -31,7 +26,7 @@ func GetService() (Service, error) {
 }
 
 // Init 初始化用户服务层
-func Init() {
+func InitService() {
 	m.Lock()
 	defer m.Unlock()
 

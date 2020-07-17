@@ -1,25 +1,17 @@
-package main
+package user
 
 import (
 	"fmt"
 
-	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/basic/common"
-
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro/cli/v2"
-	"github.com/zbrechave/tsquare/srv/user/model"
-
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/zbrechave/tsquare/basic/config"
-	"github.com/zbrechave/tsquare/srv/user/handler"
-
-	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/zbrechave/tsquare/basic"
-
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
-
+	"github.com/micro/go-micro/v2/registry"
+	"github.com/micro/go-micro/v2/registry/etcd"
+	"github.com/micro/go-plugins/config/source/grpc/v2"
+	"github.com/zbrechave/tsquare/basic"
+	"github.com/zbrechave/tsquare/basic/common"
+	"github.com/zbrechave/tsquare/basic/config"
 	user "github.com/zbrechave/tsquare/proto/user"
 )
 
@@ -48,15 +40,15 @@ func main() {
 	// Initialise service
 	service.Init(micro.Action(func(context *cli.Context) error {
 		// 初始化模型层
-		model.Init()
+		InitService()
 		// 初始化handler
-		handler.Init()
+		InitHandler()
 
 		return nil
 	}))
 
 	// Register Handler
-	_ = user.RegisterUserHandler(service.Server(), new(handler.User))
+	_ = user.RegisterUserHandler(service.Server(), new(User))
 
 	// Run service
 	if err := service.Run(); err != nil {

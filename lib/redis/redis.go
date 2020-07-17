@@ -3,9 +3,11 @@ package redis
 import (
 	"bytes"
 	"encoding/gob"
+	"log"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/gomodule/redigo/redis"
-	"time"
 )
 
 var RedisPool *redis.Pool
@@ -44,14 +46,12 @@ func init() {
 	}
 }
 
+func SetCookie(c *gin.Context, name string, value string, maxAge int) {
 
-func SetCookie(c *gin.Context,name string, value string, maxAge int)  {
+	domain := Config.Section("cookie").Key("domain").String()
 
-	domain:= Config.Section("cookie").Key("domain").String()
-
-	c.SetCookie(name,value,maxAge,"/",domain,false,true)
+	c.SetCookie(name, value, maxAge, "/", domain, false, true)
 }
-
 
 func ByteEncoder(s interface{}) []byte {
 	var enc_result bytes.Buffer

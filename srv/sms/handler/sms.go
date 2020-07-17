@@ -20,7 +20,7 @@ type Sms struct{}
 func (s *Sms) Send(ctx context.Context, req *sms_proto.Request, rsp *sms_proto.Response) error {
 	log.Info("Received Sms.Send request")
 
-	rds := redis.RedisPool.Get()
+	rds := redis.Pool.Get()
 	code := utils.GenVerificationCode()
 	mobileCodeStr := fmt.Sprintf("mobile:%s", req.Mobile)
 	if _, err := rds.Do("SET", mobileCodeStr, code); err != nil {

@@ -1,12 +1,12 @@
 package main
 
 import (
+	"github.com/davveo/tsquare/lib/token"
+	"github.com/davveo/tsquare/lib/wrapper/auth"
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-plugins/micro/cors/v2"
 	"github.com/micro/micro/v2/cmd"
 	"github.com/micro/micro/v2/plugin"
-	"github.com/zbrechave/tsquare/lib/token"
-	"github.com/zbrechave/tsquare/lib/wrapper/auth"
 )
 
 func init() {

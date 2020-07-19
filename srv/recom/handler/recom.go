@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	recom "github.com/zbrechave/tsquare/proto/recom"
+	recom "github.com/davveo/tsquare/proto/recom"
 )
 
 type Recom struct{}

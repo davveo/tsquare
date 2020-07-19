@@ -4,10 +4,10 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/davveo/tsquare/basic"
+	"github.com/davveo/tsquare/basic/config"
 	r "github.com/go-redis/redis"
 	log "github.com/micro/go-micro/v2/logger"
-	"github.com/zbrechave/tsquare/basic"
-	"github.com/zbrechave/tsquare/basic/config"
 )
 
 var (

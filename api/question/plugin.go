@@ -1,5 +1,5 @@
 package main
 
 import (
-	_ "github.com/zbrechave/tsquare/plugins/session"
+	_ "github.com/davveo/tsquare/plugins/session"
 )

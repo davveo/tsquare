@@ -3,26 +3,26 @@ package main
 import (
 	"fmt"
 
+	"github.com/davveo/tsquare/basic/common"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/basic/common"
 	"go.uber.org/zap"
 
+	"github.com/davveo/tsquare/srv/auth/model"
 	"github.com/micro/cli/v2"
-	"github.com/zbrechave/tsquare/srv/auth/model"
 
-	"github.com/zbrechave/tsquare/srv/auth/handler"
+	"github.com/davveo/tsquare/srv/auth/handler"
 
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 
-	z "github.com/zbrechave/tsquare/plugins/zap"
+	z "github.com/davveo/tsquare/plugins/zap"
 
 	"github.com/micro/go-micro/v2"
 
-	auth "github.com/zbrechave/tsquare/proto/auth"
+	auth "github.com/davveo/tsquare/proto/auth"
 
-	"github.com/zbrechave/tsquare/basic"
-	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/davveo/tsquare/basic"
+	"github.com/davveo/tsquare/basic/config"
 )
 
 var (

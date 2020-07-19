@@ -1,7 +1,7 @@
 package basic
 
 import (
-	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/davveo/tsquare/basic/config"
 )
 
 var (

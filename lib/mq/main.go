@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zbrechave/tsquare/lib/mq/rabbitmq"
+	"github.com/davveo/tsquare/lib/mq/rabbitmq"
 )
 
 func main() {

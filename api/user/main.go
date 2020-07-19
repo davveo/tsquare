@@ -9,10 +9,10 @@ import (
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/web"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/api/user/handler"
-	"github.com/zbrechave/tsquare/basic"
-	"github.com/zbrechave/tsquare/basic/common"
-	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/davveo/tsquare/api/user/handler"
+	"github.com/davveo/tsquare/basic"
+	"github.com/davveo/tsquare/basic/common"
+	"github.com/davveo/tsquare/basic/config"
 	"time"
 )
 

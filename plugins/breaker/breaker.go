@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/afex/hystrix-go/hystrix"
-	statusCode "github.com/zbrechave/tsquare/plugins/breaker/http"
+	statusCode "github.com/davveo/tsquare/plugins/breaker/http"
 )
 
 //BreakerWrapper hystrix breaker

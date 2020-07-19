@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/davveo/tsquare/basic/config"
+	"github.com/davveo/tsquare/plugins/jwt"
+	"github.com/davveo/tsquare/plugins/redis"
 	r "github.com/go-redis/redis"
 	log "github.com/micro/go-micro/v2/logger"
-	"github.com/zbrechave/tsquare/basic/config"
-	"github.com/zbrechave/tsquare/plugins/jwt"
-	"github.com/zbrechave/tsquare/plugins/redis"
 )
 
 var (

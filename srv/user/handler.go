@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	userproto "github.com/davveo/tsquare/proto/user"
 	log "github.com/micro/go-micro/v2/logger"
-	userproto "github.com/zbrechave/tsquare/proto/user"
 )
 
 type User struct{}

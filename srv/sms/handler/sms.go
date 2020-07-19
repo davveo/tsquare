@@ -5,26 +5,26 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/zbrechave/tsquare/lib/redis"
-	"github.com/zbrechave/tsquare/srv/sms/provider"
-	"github.com/zbrechave/tsquare/srv/sms/utils"
+	"github.com/davveo/tsquare/lib/redis"
+	"github.com/davveo/tsquare/srv/sms/provider"
+	"github.com/davveo/tsquare/srv/sms/utils"
 
 	//"github.com/zbrechave/tsquare/srv/sms-srv/provider"
 
+	smsproto "github.com/davveo/tsquare/proto/sms"
 	log "github.com/micro/go-micro/v2/logger"
-	sms_proto "github.com/zbrechave/tsquare/proto/sms"
 )
 
 type Sms struct{}
 
-func (s *Sms) Send(ctx context.Context, req *sms_proto.Request, rsp *sms_proto.Response) error {
+func (s *Sms) Send(ctx context.Context, req *smsproto.Request, rsp *smsproto.Response) error {
 	log.Info("Received Sms.Send request")
 
 	rds := redis.Pool.Get()
 	code := utils.GenVerificationCode()
 	mobileCodeStr := fmt.Sprintf("mobile:%s", req.Mobile)
 	if _, err := rds.Do("SET", mobileCodeStr, code); err != nil {
-		rsp.Error = &sms_proto.Error{
+		rsp.Error = &smsproto.Error{
 			Code:   http.StatusInternalServerError,
 			Detail: err.Error(),
 		}
@@ -38,7 +38,7 @@ func (s *Sms) Send(ctx context.Context, req *sms_proto.Request, rsp *sms_proto.R
 
 	err := provider.Alidayu{}.Send(&sms)
 	if err != nil {
-		rsp.Error = &sms_proto.Error{
+		rsp.Error = &smsproto.Error{
 			Code:   http.StatusInternalServerError,
 			Detail: err.Error(),
 		}

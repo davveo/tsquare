@@ -3,16 +3,17 @@ package user
 import (
 	"fmt"
 
+	"github.com/davveo/tsquare/basic"
+	"github.com/davveo/tsquare/basic/common"
+	"github.com/davveo/tsquare/basic/config"
+	user "github.com/davveo/tsquare/proto/user"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/basic"
-	"github.com/zbrechave/tsquare/basic/common"
-	"github.com/zbrechave/tsquare/basic/config"
-	user "github.com/zbrechave/tsquare/proto/user"
 )
 
 var (

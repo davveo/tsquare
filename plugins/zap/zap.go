@@ -1,8 +1,8 @@
 package zap
 
 import (
-	"github.com/zbrechave/tsquare/basic"
-	"github.com/zbrechave/tsquare/basic/config"
+	"github.com/davveo/tsquare/basic"
+	"github.com/davveo/tsquare/basic/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"

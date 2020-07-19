@@ -3,18 +3,18 @@ package main
 import (
 	"fmt"
 
+	"github.com/davveo/tsquare/basic"
+	"github.com/davveo/tsquare/basic/common"
+	"github.com/davveo/tsquare/basic/config"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/basic"
-	"github.com/zbrechave/tsquare/basic/common"
-	"github.com/zbrechave/tsquare/basic/config"
 
-	recom "github.com/zbrechave/tsquare/proto/recom"
-	"github.com/zbrechave/tsquare/srv/recom/handler"
+	recom "github.com/davveo/tsquare/proto/recom"
+	"github.com/davveo/tsquare/srv/recom/handler"
 )
 
 var (

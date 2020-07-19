@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/davveo/tsquare/api/answer/handler"
+	"github.com/davveo/tsquare/basic"
+	"github.com/davveo/tsquare/basic/common"
+	"github.com/davveo/tsquare/basic/config"
 	"github.com/gin-gonic/gin"
 	"github.com/micro/cli/v2"
 	log "github.com/micro/go-micro/v2/logger"
@@ -9,13 +13,8 @@ import (
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/web"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
-	"github.com/zbrechave/tsquare/api/answer/handler"
-	"github.com/zbrechave/tsquare/basic"
-	"github.com/zbrechave/tsquare/basic/common"
-	"github.com/zbrechave/tsquare/basic/config"
 	"time"
 )
-
 
 var (
 	appName = "answer_api"
@@ -37,7 +36,6 @@ func main() {
 	router := gin.Default()
 	answer := new(handler.Answer)
 	router.POST("/user/login", answer.Call)
-
 
 	service := web.NewService(
 		web.Name(cfg.Name),
@@ -88,4 +86,3 @@ func registryOptions(ops *registry.Options) {
 	}
 	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.Host, etcdCfg.Port)}
 }
-

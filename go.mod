@@ -1,4 +1,4 @@
-module github.com/zbrechave/tsquare
+module github.com/davveo/tsquare
 
 go 1.13
 

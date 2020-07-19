@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"time"
 
+	"github.com/davveo/tsquare/basic/config"
 	log "github.com/micro/go-micro/v2/logger"
-	"github.com/zbrechave/tsquare/basic/config"
 )
 
 type db struct {

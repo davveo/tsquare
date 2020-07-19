@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	senword "github.com/zbrechave/tsquare/proto/senword"
+	senword "github.com/davveo/tsquare/proto/senword"
 )
 
 type Senword struct{}

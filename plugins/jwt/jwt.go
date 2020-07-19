@@ -1,6 +1,6 @@
 package jwt
 
-import "github.com/zbrechave/tsquare/basic"
+import "github.com/davveo/tsquare/basic"
 
 // Jwt 配置 接口
 type Jwt struct {

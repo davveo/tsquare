@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	ad "github.com/zbrechave/tsquare/proto/ad"
+	ad "github.com/davveo/tsquare/proto/ad"
 )
 
 type Ad struct{}

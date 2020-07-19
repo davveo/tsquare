@@ -1,8 +1,8 @@
 package auth
 
 import (
+	"github.com/davveo/tsquare/lib/token"
 	"github.com/micro/micro/v2/plugin"
-	"github.com/zbrechave/tsquare/lib/token"
 	"log"
 	"net/http"
 )

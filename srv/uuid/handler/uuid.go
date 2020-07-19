@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/zbrechave/tsquare/srv/uuid/idworker"
+	"github.com/davveo/tsquare/srv/uuid/idworker"
 
-	uuid_proto "github.com/zbrechave/tsquare/proto/uuid"
+	uuidproto "github.com/davveo/tsquare/proto/uuid"
 )
 
 type Uuid struct{}
 
-func (e *Uuid) GenerateId(ctx context.Context, req *uuid_proto.Request, rsp *uuid_proto.Response) error {
+func (e *Uuid) GenerateId(ctx context.Context, req *uuidproto.Request, rsp *uuidproto.Response) error {
 	if err := idworker.InitNode(req.NodeId); err != nil {
 		rsp.Msg = fmt.Sprintf(err.Error())
 		rsp.Code = -1
@@ -40,7 +40,7 @@ func (e *Uuid) GenerateId(ctx context.Context, req *uuid_proto.Request, rsp *uui
 		return nil
 	}
 
-	rsp.Data = &uuid_proto.Data{
+	rsp.Data = &uuidproto.Data{
 		Id: id,
 	}
 	rsp.Msg = "success"

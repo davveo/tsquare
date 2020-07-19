@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 
+	proto "github.com/davveo/tsquare/proto/question"
 	log "github.com/micro/go-micro/v2/logger"
-	proto "github.com/zbrechave/tsquare/proto/question"
 )
 
 type QuestionService struct{}

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/davveo/tsquare/basic"
 	log "github.com/micro/go-micro/v2/logger"
-	"github.com/zbrechave/tsquare/basic"
 )
 
 var (

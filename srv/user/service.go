@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/RichardKnop/uuid"
+	"github.com/davveo/tsquare/util"
+	pass "github.com/davveo/tsquare/util/password"
 	"github.com/jinzhu/gorm"
-	"github.com/zbrechave/tsquare/util"
-	pass "github.com/zbrechave/tsquare/util/password"
 )
 
 var (
@@ -38,7 +38,7 @@ func (s *service) SetPassword(user *UserModel, password string) error {
 }
 
 func (s *service) AuthUser(username, thePassword string) (*UserModel, error) {
-
+	return nil, nil
 }
 
 func (s *service) UserExists(username string) bool {
@@ -54,6 +54,25 @@ func (s *service) QueryUserByName(username string) (*UserModel, error) {
 		return nil, ErrUserNotFound
 	}
 	return user, nil
+}
+
+func (s *service) QueryUserByUserId(id int64) (*UserModel, error) {
+	user := new(UserModel)
+	notFound := s.db.Where("username = LOWER(?)", username).
+		First(user).RecordNotFound()
+	if notFound {
+		return nil, ErrUserNotFound
+	}
+
+	return user, nil
+}
+
+func (s *service) QueryUserByPhone(phone string) (*UserModel, error) {
+	return nil, nil
+}
+
+func (s *service) QueryUserList(page, size int) (*[]UserModel, error) {
+	return nil, nil
 }
 
 func (s *service) createUserCommon(db *gorm.DB, username, password string) (*UserModel, error) {
@@ -106,4 +125,8 @@ func (s *service) setPasswordCommon(db *gorm.DB, user *UserModel, password strin
 		Password:      util.StringOrNull(string(passwordHash)),
 		BaseGormModel: BaseGormModel{UpdatedAt: time.Now().UTC()},
 	}).Error
+}
+
+func (s *service) queryUserCommon(db *gorm.DB, phone, username string, id int64) error {
+	return nil
 }

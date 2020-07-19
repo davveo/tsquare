@@ -5,7 +5,7 @@ import (
 
 	log "github.com/micro/go-micro/v2/logger"
 
-	answer "github.com/zbrechave/tsquare/proto/answer"
+	answer "github.com/davveo/tsquare/proto/answer"
 )
 
 type Answer struct{}

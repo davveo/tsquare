@@ -1,4 +1,13 @@
 ## tsquare
+### 说明
+这个项目暂时停止开发, 目前先更新完单体版的服务, 项目地址为:
+https://github.com/davveo/singleTsquare
+单体版后端预计8月底更新完毕.
+
+等到单体版更新完毕后, 会继续更新服务版，欢迎大家star关注.
+
+
+
 ### 项目架构图
 ![项目架构图](https://github.com/zbrechave/tsquare/blob/master/docs/项目架构图.jpg)
 ### 项目启动
